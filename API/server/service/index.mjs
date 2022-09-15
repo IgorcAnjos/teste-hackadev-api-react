@@ -1,0 +1,232 @@
+import * as data from "../data/index.mjs";
+import pkg from "crypto-js";
+const { MD5 } = pkg;
+
+export const getUsuarios = async () => {
+  const usuarios = await data.getUsuarios();
+  return usuarios;
+};
+// Zerar banco de dados -------------------------------------------------
+export const zeraDb = async () => {
+  try {
+    data.zeraDb();
+  } catch {
+    throw new Error("Não foi possivel excluir");
+  }
+};
+
+// Referentes a Produtos  -----------------------------------------------
+
+// Pegar todos os produtos do banco
+export const getProdutos = async () => {
+  try {
+    const produtos = await data.getProdutos();
+    return produtos;
+  } catch {
+    throw new Error("Erro interno");
+  }
+};
+
+// Pegar produtos por categoria
+export const getProdutosByIdCategoria = async (id) => {
+  if (id === undefined) {
+    throw new Error("id invalido");
+  } else {
+    const produtos = await data.getProdutosByIdCategoria(id);
+    if (produtos.length === 0) {
+      throw new Error("Nenhum produto encontrado");
+    }
+    return produtos;
+  }
+};
+
+// Atualizar produtos do banco de dados
+
+// Inserir produtos no banco de dados
+
+// subtrair quantidades de produtos com um tamanho selecionado
+
+// Referentes a Cadastros e Dados Dadastrais  ---------------------------
+
+// Cadastrar novos usuarios
+export const insertCadastro = (newUsuario) => {
+  if (newUsuario.email === undefined || newUsuario.senha === undefined) {
+    throw new Error("Todos os campos são obrigatórios");
+  } else {
+    data.insertCadastro(newUsuario);
+  }
+};
+
+// Inativar usuarios cadastrados
+export const inativarUsuarioById = (idUsuario) => {
+  Number(idUsuario);
+  if (idUsuario === undefined) {
+    throw new Error("Id invalido");
+  } else {
+    data.inativarUsuarioById(idUsuario);
+  }
+};
+
+// Efetuar login verificar dados e gerar token de acesso
+export const makeLogin = async (dados) => {
+  const { email, senha } = dados;
+
+  if (
+    email !== undefined ||
+    email !== null ||
+    senha !== undefined ||
+    senha !== null
+  ) {
+    function verificarDados() {
+      const senhaMD5 = MD5(String(senha));
+      if (dadosDoBanco.senha == senhaMD5) {
+        return true;
+      } else {
+        return false;
+      }
+    }
+
+    function gerartoken() {
+      let middle = String(dadosDoBanco.senha);
+      const token = `${middle.substr(0, 5).toUpperCase()}${middle
+        .substr(27, 5)
+        .toUpperCase()}`;
+      const id = dadosDoBanco.id;
+      const email = dadosDoBanco.email;
+      const admin = dadosDoBanco.admin;
+      const dados = {
+        id,
+        email,
+        token,
+        admin,
+      };
+      return dados;
+    }
+
+    const dadosDoBanco = await data.makeLogin(email);
+    if (!dadosDoBanco) {
+      throw new Error("usuario não encontrado");
+    } else {
+      const verificado = verificarDados();
+
+      if (verificado) {
+        const IdEmailSenhaTokenAdmin = gerartoken();
+        return IdEmailSenhaTokenAdmin;
+      } else {
+        throw new Error("usuario ou senha invalidos");
+      }
+    }
+  } else {
+    throw new Error("dados invalidos");
+  }
+};
+
+// Atualizar dados cadastrais
+export const updateCadastro = (idUsuario, newDados) => {
+  if (
+    (idUsuario === undefined,
+    newDados.nomeCompleto === undefined ||
+      newDados.pais === undefined ||
+      newDados.cep === undefined ||
+      newDados.logradouro === undefined ||
+      newDados.cidade === undefined ||
+      newDados.estado === undefined ||
+      newDados.complemento === undefined)
+  ) {
+    throw new Error("Há dados invalidos.");
+  } else {
+    data.updateCadastro(idUsuario, newDados);
+  }
+};
+
+// Atualizar email e senha cadastradas
+export const changeEmailPassword = (newDados, idUsuario) => {
+  if (
+    newDados.email === undefined ||
+    newDados.senha === undefined ||
+    idUsuario === undefined
+  ) {
+    throw new Error("Conteúdo invalido");
+  } else {
+    data.changeEmailPassword(newDados, idUsuario);
+  }
+};
+
+// Atualizar Usuario para ADM
+export const changeAdmUsuario = (idUsuario) => {
+  if (idUsuario === undefined) {
+    throw new Error("Invalid idUsuario");
+  } else {
+    data.changeAdmUsuario(idUsuario);
+  }
+};
+
+// Referentes a pedidos --------------------------------
+
+// Pegar todos os pedidos existentes
+export const getPedidos = async () => {
+  const pedidos = await data.getPedidos();
+  return pedidos;
+};
+
+// Pegar todos os pedidos de um usuário
+
+export const getPedidosByIdUsuario = async (idUsuario) => {
+  const pedidos = await data.getPedidosByIdUsuario(idUsuario);
+  return pedidos;
+};
+
+// Pegar dados informações de um pedido
+
+export const getInfoPedidoById = async (idPedido) => {
+  const pedido = await data.getInfoPedidoById(idPedido);
+  return pedido;
+};
+
+// Pegar produtos de um pedido
+
+export const getProdutosByPedidoId = async (idPedido) => {
+  const produtos = await data.getProdutosByPedidoId(idPedido);
+  return produtos;
+};
+
+// Inserir um novo pedido
+export const insertPedido = (newPedido) => {
+  if (
+    newPedido.idUsuario === undefined ||
+    newPedido.precoTotal === undefined ||
+    newPedido.idFormaPagamento === undefined
+  ) {
+    throw new Error(
+      "Está faltando um desses: idUsuario, precoTotal, idFormaPagamento"
+    );
+  } else {
+    data.insertPedido(newPedido);
+  }
+};
+
+// Inserir produtos de um determinado pedido
+
+export const insertProdutosByPedidoId = (idPedido, produtos) => {
+  if (produtos.length === 0) {
+    throw new Error("É necessário a inserção de produtos");
+  } else {
+    data.insertProdutosByPedidoId(idPedido, produtos);
+  }
+};
+
+// Alterar informações de um pedido
+
+export const updatePedido = (idPedidoUpdate, updatePedido) => {
+  if (
+    idPedidoUpdate === undefined ||
+    updatePedido.status === undefined ||
+    updatePedido.idFormaPagamento === undefined
+  ) {
+    throw new Error(
+      "Está faltando um desses:status, precoTotal, idPedidoUpdate"
+    );
+  } else {
+    data.updatePedido(idPedidoUpdate, updatePedido);
+  }
+};
