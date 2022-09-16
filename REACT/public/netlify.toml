@@ -2,8 +2,3 @@
   from = "/*"
   to = "/index.html"
   status = 200
-
-[[build]]
-base = "./REACT"
-command = "npm run build"
-publish = "./REACT/build"
