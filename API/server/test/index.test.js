@@ -4,7 +4,7 @@ const { default: axios } = require("axios");
 const url = process.env.URL_DB;
 
 beforeEach(() => {
-  const response = axios({
+  axios({
     url: `${url}`,
     method: "delete",
   });
@@ -22,7 +22,7 @@ test("Deve obter o status 200", async function () {
 // Referentes a Produtos  -----------------------------------------------
 
 // Pegar todos os produtos do banco
-test("PRODUTOS _ Deve obter o status 200 - GET", async function () {
+test("01 PRODUTOS _ Deve obter o status 200 - GET", async function () {
   const response = await axios({
     url: `${url}produtos/info/`,
     method: "get",
@@ -32,7 +32,7 @@ test("PRODUTOS _ Deve obter o status 200 - GET", async function () {
 });
 
 // Pegar produtos por categoria
-test("PRODUTOS _ Deve obter o status 200 - GET", async function () {
+test("02 PRODUTOS _ Deve obter o status 200 - GET", async function () {
   const idCategoria = 2;
   const response = await axios({
     url: `${url}produtos/categoria/${idCategoria}`,
@@ -43,7 +43,7 @@ test("PRODUTOS _ Deve obter o status 200 - GET", async function () {
 });
 
 // Pegar produtos por Id
-test("PRODUTOS _ Deve obter o status 200 - GET", async function () {
+test("03 PRODUTOS _ Deve obter o status 200 - GET", async function () {
   const idProdutos = 2;
   const response = await axios({
     url: `${url}produtos/${idProdutos}`,
@@ -54,7 +54,7 @@ test("PRODUTOS _ Deve obter o status 200 - GET", async function () {
 });
 
 // Atualizar produtos do banco de dados
-test("Produtos _ Deve obter status 204 - Update: PUT", async function () {
+test("04 Produtos _ Deve obter status 204 - Update: PUT", async function () {
   const newDadosProduto = {
     imagem: "http://Pudim.com",
     nome: "pudimzim",
@@ -81,7 +81,7 @@ test("Produtos _ Deve obter status 204 - Update: PUT", async function () {
 });
 
 // Inserir produtos no banco de dados
-test("USUARIO & CADASTROS _ Deve obter status 201 - insert: POST", async function () {
+test("01 USUARIO & CADASTROS _ Deve obter status 201 - insert: POST", async function () {
   const newProduto = {
     imagem: "http://pave.com",
     nome: "Pra ver",
@@ -105,12 +105,12 @@ test("USUARIO & CADASTROS _ Deve obter status 201 - insert: POST", async functio
 });
 
 // subtrair quantidades de produtos com um tamanho selecionado
-test.only("USUARIO & CADASTROS _ Deve obter status 204 - UPDATE: PUT", async function () {
+test("02 PRODUTOS _ Deve obter status 204 - UPDATE: PUT", async function () {
   const subtrair = {
     quantidade: 4,
     tamanho: "m",
   };
-  const idProduto = 55;
+  const idProduto = 1;
 
   const response = await axios({
     url: `${url}produtos/subtrair/${idProduto}`,
@@ -119,13 +119,15 @@ test.only("USUARIO & CADASTROS _ Deve obter status 204 - UPDATE: PUT", async fun
   });
 
   const status = response.status;
+  const message = response.status;
+  console.log(message);
   expect(status).toEqual(204);
 });
 
 // Referentes a Cadastros e Dados Dadastrais  ---------------------------
 
 // Cadastrar novos usuarios
-test("USUARIO & CADASTROS _ Deve obter status 201 - insert: POST", async function () {
+test("03 USUARIO & CADASTROS _ Deve obter status 201 - insert: POST", async function () {
   const newUsuario = {
     email: "pedro@gmail.com",
     senha: "pedrinho123",
@@ -142,7 +144,7 @@ test("USUARIO & CADASTROS _ Deve obter status 201 - insert: POST", async functio
 });
 
 // Erro Cadastrar novos usuarios
-test("Deve obter status 422 - insert: POST", async function () {
+test("04 Deve obter status 422 - insert: POST", async function () {
   const newUsuario = {
     email: "pedro@gmail.com",
   };
@@ -159,7 +161,7 @@ test("Deve obter status 422 - insert: POST", async function () {
 });
 
 // Inativar usuários cadastrados
-test("USUARIO & CADASTROS _ Deve obter status 204 - Update: PUT", async function () {
+test("05 USUARIO & CADASTROS _ Deve obter status 204 - Update: PUT", async function () {
   const idUsuario = 2;
 
   const response = await axios({
@@ -172,7 +174,7 @@ test("USUARIO & CADASTROS _ Deve obter status 204 - Update: PUT", async function
 });
 
 // Efetuar login verificar dados e gerar token de acesso
-test.skip("USUARIO & CADASTROS _ Deve obter o status 200", async function () {
+test.skip("06 USUARIO & CADASTROS _ Deve obter o status 200", async function () {
   const email = "eric@gmail.com";
   const senha = "eric@gmail.com";
 
@@ -187,7 +189,7 @@ test.skip("USUARIO & CADASTROS _ Deve obter o status 200", async function () {
 });
 
 // Atualizar dados cadastrais
-test("USUARIO & CADASTROS _ Deve obter status 204 - Update: PUT", async function () {
+test("07 USUARIO & CADASTROS _ Deve obter status 204 - Update: PUT", async function () {
   const newDados = {
     nomeCompleto: "Joca da Silva",
     pais: "Brasil",
@@ -211,7 +213,7 @@ test("USUARIO & CADASTROS _ Deve obter status 204 - Update: PUT", async function
 });
 
 // Atualizar email e senha cadastradas
-test("USUARIO & CADASTROS _ Deve obter status 204 - Update: PUT", async function () {
+test("08 USUARIO & CADASTROS _ Deve obter status 204 - Update: PUT", async function () {
   const newdados = {
     email: "joaozinho@gamil.com",
     senha: "joaozinho",
@@ -229,7 +231,7 @@ test("USUARIO & CADASTROS _ Deve obter status 204 - Update: PUT", async function
 });
 
 // Atualizar Usuario para ADM
-test("USUARIO & CADASTROS _ Deve obter status 204 - Update: PUT", async function () {
+test("09 USUARIO & CADASTROS _ Deve obter status 204 - Update: PUT", async function () {
   const idUsuario = 2;
 
   const response = await axios({
@@ -244,7 +246,7 @@ test("USUARIO & CADASTROS _ Deve obter status 204 - Update: PUT", async function
 // Referentes a pedidos --------------------------------
 
 // Pegar todos os pedidos existentes
-test("PEDIDOS _ Deve obter o status 200 - GET", async function () {
+test("01 PEDIDOS _ Deve obter o status 200 - GET", async function () {
   const response = await axios({
     url: `${url}pedidos/info`,
     method: "get",
@@ -254,7 +256,7 @@ test("PEDIDOS _ Deve obter o status 200 - GET", async function () {
 });
 
 // Pegar todos os pedidos de um usuário
-test("PEDIDOS _ Deve obter o status 200 - GET", async function () {
+test("02 PEDIDOS _ Deve obter o status 200 - GET", async function () {
   const userId = 2;
   const response = await axios({
     url: `${url}pedidos/info/usuarios/${userId}`,
@@ -265,7 +267,7 @@ test("PEDIDOS _ Deve obter o status 200 - GET", async function () {
 });
 
 // Pegar dados de um pedido
-test("PEDIDOS _ Deve obter o status 200 - GET", async function () {
+test("03 PEDIDOS _ Deve obter o status 200 - GET", async function () {
   const idPedido = 2;
   const response = await axios({
     url: `${url}pedidos/info/${idPedido}`,
@@ -276,7 +278,7 @@ test("PEDIDOS _ Deve obter o status 200 - GET", async function () {
 });
 
 // Pegar produtos de um pedido
-test("PEDIDOS _ Deve obter o status 200 - GET", async function () {
+test("04 PEDIDOS _ Deve obter o status 200 - GET", async function () {
   const idPedido = 2;
   const response = await axios({
     url: `${url}pedidos/info/produtos/${idPedido}`,
@@ -287,7 +289,7 @@ test("PEDIDOS _ Deve obter o status 200 - GET", async function () {
 });
 
 // Inserir novo pedido
-test("PEDIDO _ Deve obter status 201 - insert: POST", async function () {
+test("05 PEDIDO _ Deve obter status 201 - insert: POST", async function () {
   const newPedido = {
     idUsuario: 3,
     precoTotal: "1200",
@@ -305,7 +307,7 @@ test("PEDIDO _ Deve obter status 201 - insert: POST", async function () {
 });
 
 // Erro de Insert Pedido
-test("PEDIDO _ Deve obter status 422 - insert: POST", async function () {
+test("06 PEDIDO _ Deve obter status 422 - insert: POST", async function () {
   const newPedido = {
     idUsuario: 3,
     precoTotal: "1200",
@@ -324,7 +326,7 @@ test("PEDIDO _ Deve obter status 422 - insert: POST", async function () {
 
 // Inserir produtos de um determinado pedido
 
-test("PEDIDO _ Deve obter status 201 - insert: POST", async function () {
+test("07 PEDIDO _ Deve obter status 201 - insert: POST", async function () {
   const newProdutos = [
     {
       idProduto: 1,
@@ -359,7 +361,7 @@ test("PEDIDO _ Deve obter status 201 - insert: POST", async function () {
 
 // Error ao Inserir produtos de um determinado pedido
 
-test("PEDIDO _ Deve obter status 422 - insert: POST", async function () {
+test("08 PEDIDO _ Deve obter status 422 - insert: POST", async function () {
   const newProdutos = [];
   const idPedido = 4;
   const response = await axios({
@@ -374,7 +376,7 @@ test("PEDIDO _ Deve obter status 422 - insert: POST", async function () {
 });
 
 // Atualizar informações de um pedido
-test("Deve obter status 204 - Update: PUT", async function () {
+test("09 Deve obter status 204 - Update: PUT", async function () {
   const uptadePedido = {
     status: 2,
     idFormaPagamento: 1,

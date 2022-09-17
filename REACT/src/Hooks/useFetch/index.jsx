@@ -15,24 +15,45 @@ function useFetch(url, method, data = null) {
           setDataResponse(response.data);
         })
         .catch((err) => {
-          setError(err);
+          setError({ status: err.response.status, message: err.response.data });
+        })
+        .finally(() => {
+          setLoading(false);
+        });
+    } else if (method === "post") {
+      setLoading(true);
+      axios
+        .post(url, data)
+        .then((response) => {
+          setDataResponse(response.status);
+        })
+        .catch((err) => {
+          setError({ status: err.response.status, message: err.response.data });
+        })
+        .finally(() => {
+          setLoading(false);
+        });
+    } else if (method === "put") {
+      axios
+        .put(url, data)
+        .then((response) => setDataResponse(response.status))
+        .catch((err) =>
+          setError({ status: err.response.status, message: err.response.data })
+        )
+        .finally(() => setLoading(false));
+    } else if (method === "delete") {
+      axios
+        .delete(url)
+        .then((response) => {
+          setDataResponse(response.status);
+        })
+        .catch((err) => {
+          setError({ status: err.response.status, message: err.response.data });
         })
         .finally(() => {
           setLoading(false);
         });
     }
-    // if (method === "put") {
-    //   setDataRequest(data);
-    //   setLoading;
-    //   axios
-    //     .put(url, data)
-    //     .then((response) => {
-    //       setDataResponse(response);
-    //     })
-    //     .catch((err) => {
-    //       setError(err.response.data);
-    //     });
-    // }
   };
 
   useEffect(() => {
