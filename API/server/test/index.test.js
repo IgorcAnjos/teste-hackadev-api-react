@@ -32,7 +32,7 @@ test("PRODUTOS _ Deve obter o status 200 - GET", async function () {
 });
 
 // Pegar produtos por categoria
-test.only("PRODUTOS _ Deve obter o status 200 - GET", async function () {
+test("PRODUTOS _ Deve obter o status 200 - GET", async function () {
   const idCategoria = 2;
   const response = await axios({
     url: `${url}produtos/categoria/${idCategoria}`,
@@ -42,13 +42,85 @@ test.only("PRODUTOS _ Deve obter o status 200 - GET", async function () {
   expect(status).toEqual(200);
 });
 
+// Pegar produtos por Id
+test("PRODUTOS _ Deve obter o status 200 - GET", async function () {
+  const idProdutos = 2;
+  const response = await axios({
+    url: `${url}produtos/${idProdutos}`,
+    method: "get",
+  });
+  const status = response.status;
+  expect(status).toEqual(200);
+});
+
 // Atualizar produtos do banco de dados
+test("Produtos _ Deve obter status 204 - Update: PUT", async function () {
+  const newDadosProduto = {
+    imagem: "http://Pudim.com",
+    nome: "pudimzim",
+    descricao: "Este produto é baum",
+    preco: 1400,
+    quantidadeP: 1,
+    quantidadeM: 2,
+    quantidadeG: 3,
+    desconto: 100,
+  };
+
+  const idProduto = 2;
+
+  const response = await axios({
+    url: `${url}produtos/atualizar/${idProduto}`,
+    method: "put",
+    data: newDadosProduto,
+  });
+
+  const status = response.status;
+  const message = response.message;
+  console.log(message);
+  expect(status).toEqual(204);
+});
 
 // Inserir produtos no banco de dados
+test("USUARIO & CADASTROS _ Deve obter status 201 - insert: POST", async function () {
+  const newProduto = {
+    imagem: "http://pave.com",
+    nome: "Pra ver",
+    descricao: "Não é pra comer",
+    idCategoria: 3,
+    preco: 1500,
+    quantidadeP: 0,
+    quantidadeM: 0,
+    quantidadeG: 0,
+    desconto: 2,
+  };
+
+  const response = await axios({
+    url: `${url}produtos/cadastrar/`,
+    method: "post",
+    data: newProduto,
+  });
+
+  const status = response.status;
+  expect(status).toEqual(201);
+});
 
 // subtrair quantidades de produtos com um tamanho selecionado
+test.only("USUARIO & CADASTROS _ Deve obter status 204 - UPDATE: PUT", async function () {
+  const subtrair = {
+    quantidade: 4,
+    tamanho: "m",
+  };
+  const idProduto = 55;
 
-//
+  const response = await axios({
+    url: `${url}produtos/subtrair/${idProduto}`,
+    method: "put",
+    data: subtrair,
+  });
+
+  const status = response.status;
+  expect(status).toEqual(204);
+});
 
 // Referentes a Cadastros e Dados Dadastrais  ---------------------------
 

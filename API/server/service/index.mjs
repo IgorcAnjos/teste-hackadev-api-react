@@ -28,11 +28,24 @@ export const getProdutos = async () => {
 };
 
 // Pegar produtos por categoria
-export const getProdutosByIdCategoria = async (id) => {
-  if (id === undefined) {
+export const getProdutosByIdCategoria = async (idCategoria) => {
+  if (idCategoria === undefined) {
     throw new Error("id invalido");
   } else {
-    const produtos = await data.getProdutosByIdCategoria(id);
+    const produtos = await data.getProdutosByIdCategoria(idCategoria);
+    if (produtos.length === 0) {
+      throw new Error("Nenhum produto encontrado");
+    }
+    return produtos;
+  }
+};
+
+// Pegar produtos por Id
+export const getProdutosById = async (idProduto) => {
+  if (idProduto === undefined) {
+    throw new Error("id invalido");
+  } else {
+    const produtos = await data.getProdutosById(idProduto);
     if (produtos.length === 0) {
       throw new Error("Nenhum produto encontrado");
     }
@@ -41,10 +54,72 @@ export const getProdutosByIdCategoria = async (id) => {
 };
 
 // Atualizar produtos do banco de dados
+export const atualizarDadosDeProdutos = (newDadosProduto, idProduto) => {
+  if (
+    idProduto === undefined ||
+    newDadosProduto.imagem === undefined ||
+    newDadosProduto.nome === undefined ||
+    newDadosProduto.descricao === undefined ||
+    newDadosProduto.preco === undefined ||
+    newDadosProduto.quantidadeP === undefined ||
+    newDadosProduto.quantidadeM === undefined ||
+    newDadosProduto.quantidadeG === undefined ||
+    newDadosProduto.desconto === undefined
+  ) {
+    throw new Error("Há dados invalidos.");
+  } else {
+    data.atualizarDadosDeProdutos(newDadosProduto, idProduto);
+  }
+};
 
 // Inserir produtos no banco de dados
+export const insertProduto = (newProduto) => {
+  // if (
+  //   newProduto.imagem === undefined ||
+  //   newProduto.nome === undefined ||
+  //   newProduto.descricao === undefined ||
+  //   newProduto.idCategoria === undefined ||
+  //   newProduto.preco === undefined ||
+  //   newProduto.quantidadeP === undefined ||
+  //   newProduto.quantidadeM === undefined ||
+  //   newProduto.quantidadeG === undefined ||
+  //   newProduto.desconto === undefined
+  // ) {
+  //   throw new Error("Todos os campos são obrigatórios");
+  // } else {
+  data.insertProduto(newProduto);
+  // }
+};
 
 // subtrair quantidades de produtos com um tamanho selecionado
+export const subtrairProduto = async (subtrair, idProduto) => {
+  const { quantidade, tamanho } = subtrair;
+  if (
+    idProduto === undefined ||
+    quantidade === undefined ||
+    tamanho === undefined
+  ) {
+    throw new Error("Há dados invalidos.");
+  } else {
+    const produtoInfo = await data.getProdutosById(idProduto);
+    if (produtoInfo.length === 0) {
+      throw new Error("Produto não encontrado");
+    } else if (produtoInfo.length > 0) {
+      const quantidadeTamanhoTexto = `quantidade_${tamanho}`;
+      if (Number(produtoInfo[0][quantidadeTamanhoTexto]) - quantidade < 0) {
+        throw new Error("Quantidade de produtos indisponível");
+      } else {
+        const sobra =
+          Number(produtoInfo[0][quantidadeTamanhoTexto]) - Number(quantidade);
+        try {
+          data.subtrairProduto(quantidadeTamanhoTexto, sobra, idProduto);
+        } catch {
+          throw new Error("Não foi possivel adicionar o produto");
+        }
+      }
+    }
+  }
+};
 
 // Referentes a Cadastros e Dados Dadastrais  ---------------------------
 

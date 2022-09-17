@@ -162,7 +162,7 @@ on pd.id_categoria = ct.id
 };
 
 // Pegar produtos por categoria
-export const getProdutosByIdCategoria = (id) => {
+export const getProdutosByIdCategoria = (idCategoria) => {
   return bancoDeDados.query(
     `
   SELECT
@@ -182,15 +182,121 @@ export const getProdutosByIdCategoria = (id) => {
   WHERE ct.id = $1
 
     `,
-    [id]
+    [idCategoria]
+  );
+};
+
+// Pegar produtos por Id
+export const getProdutosById = (idProduto) => {
+  return bancoDeDados.query(
+    `
+  SELECT
+    pd.id,
+    pd.imagem,
+    pd.nome,
+    pd.descricao,
+    pd.id_categoria,
+    ct.nome "nome_categoria",
+    pd.quantidade_p,
+    pd.quantidade_m,
+    pd.quantidade_g,
+    pd.desconto 
+  FROM produtos as pd
+  JOIN categorias as ct
+  on pd.id_categoria = ct.id
+  WHERE pd.id = $1
+
+    `,
+    [idProduto]
   );
 };
 
 // Atualizar produtos do banco de dados
+export const atualizarDadosDeProdutos = (newDadosProduto, idProduto) => {
+  const {
+    imagem,
+    nome,
+    descricao,
+    preco,
+    quantidadeP,
+    quantidadeM,
+    quantidadeG,
+    desconto,
+  } = newDadosProduto;
+  const id = Number(idProduto);
+
+  bancoDeDados.none(
+    `
+    UPDATE produtos
+    SET
+      imagem = $1,
+      nome = $2,
+      descricao = $3,
+      preco = $4,
+      quantidade_p = $5,
+      quantidade_m = $6,
+      quantidade_g = $7,
+      desconto = $8
+    WHERE id = $9
+    `,
+    [
+      imagem,
+      nome,
+      descricao,
+      preco,
+      quantidadeP,
+      quantidadeM,
+      quantidadeG,
+      desconto,
+      id,
+    ]
+  );
+};
 
 // Inserir produtos no banco de dados
 
+export const insertProduto = (newProduto) => {
+  const {
+    imagem,
+    nome,
+    descricao,
+    idCategoria,
+    preco,
+    quantidadeP,
+    quantidadeM,
+    quantidadeG,
+    desconto,
+  } = newProduto;
+  bancoDeDados.none(
+    `
+    INSERT INTO produtos (imagem, nome, descricao, id_categoria, preco, quantidade_p, quantidade_m, quantidade_g, desconto)
+VALUES
+    ($1, $2, $3, $4, $5, $6, $7, $8, $9);
+    `,
+    [
+      imagem,
+      nome,
+      descricao,
+      idCategoria,
+      preco,
+      quantidadeP,
+      quantidadeM,
+      quantidadeG,
+      desconto,
+    ]
+  );
+};
+
 // subtrair quantidades de produtos com um tamanho selecionado
+export const subtrairProduto = (quantidadeTamanhoTexto, sobra, idProduto) => {
+  const query = `
+  UPDATE produtos
+    SET 
+      ${quantidadeTamanhoTexto} = ${sobra}
+    WHERE id = ${idProduto};
+  `;
+  bancoDeDados.none(query);
+};
 
 // Referentes a Cadastros e Dados Dadastrais  ---------------------------
 

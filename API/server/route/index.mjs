@@ -1,5 +1,4 @@
-import express, { request } from "express";
-import { getProdutosByPedidoId } from "../data/index.mjs";
+import express from "express";
 const router = express.Router();
 
 import * as service from "../service/index.mjs";
@@ -9,13 +8,16 @@ router.get("/", async (req, res) => {
 });
 
 router.get("/usuarios", async (req, res) => {
+  res.setHeader("Access-Control-Allow-Origin", "*");
   const usuariosJSON = await service.getUsuarios();
   res.json(usuariosJSON);
 });
 
 // Zerar banco de dados -------------------------------------------------
-// zerar Banco de Dados endpoint: | method: "delete"
+// zerar Banco de Dados endpoint: /
+// method: "delete"
 router.delete("/", async (req, res) => {
+  res.setHeader("Access-Control-Allow-Origin", "*");
   try {
     service.zeraDb();
     res.status(204).end();
@@ -30,6 +32,7 @@ router.delete("/", async (req, res) => {
 // endpoint: /produtos/info
 // method: "get"
 router.get("/produtos/info", async (req, res) => {
+  res.setHeader("Access-Control-Allow-Origin", "*");
   try {
     const produtos = await service.getProdutos();
     res.status(200).json(produtos);
@@ -39,12 +42,27 @@ router.get("/produtos/info", async (req, res) => {
 });
 
 // Pegar produtos por categoria
-// endpoint: //produtos/categoria/:id_categoria
+// endpoint: /produtos/categoria/:id_categoria
 // methoc: "get"
 router.get("/produtos/categoria/:id", async (req, res) => {
-  const id = req.params.id;
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  const idCategoria = req.params.id;
   try {
-    const produtos = await service.getProdutosByIdCategoria(id);
+    const produtos = await service.getProdutosByIdCategoria(idCategoria);
+    res.status(200).json(produtos);
+  } catch (e) {
+    res.status(404).send(e.message);
+  }
+});
+
+// Pegar produtos por Id
+// endpoint: /produtos/:id
+// method: "get"
+router.get("/produtos/:id", async (req, res) => {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  const idProduto = req.params.id;
+  try {
+    const produtos = await service.getProdutosById(idProduto);
     res.status(200).json(produtos);
   } catch (e) {
     res.status(404).send(e.message);
@@ -52,10 +70,70 @@ router.get("/produtos/categoria/:id", async (req, res) => {
 });
 
 // Atualizar produtos do banco de dados
+// endpoint: /produtos/atualizar/:id
+// method: "put"
+// body: {
+//   imagem: "http://Pudim.com",
+//   nome: "pudimzim",
+//   descricao: "Este produto é baum",
+//   preco: 1400,
+//   quantidadeP: 1,
+//   quantidadeM: 2,
+//   quantidadeG: 3,
+//   desconto: 100,
+// }
+router.put("/produtos/atualizar/:id", async (req, res) => {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  const newDadosProduto = req.body;
+  const idProduto = req.params.id;
+  try {
+    service.atualizarDadosDeProdutos(newDadosProduto, idProduto);
+    res.status(204).end();
+  } catch (e) {
+    res.status(500).send(e.message);
+  }
+});
 
-// Inserir produtos no banco de dados
+// Inserir produto no banco de dados
+// endpoint: /produtos/cadastrar/
+// method: "post"
+// body: {
+//   imagem: "http://pave.com",
+//   nome: "Pra ver",
+//   descricao: "Não é pra comer",
+//   idCategoria: 3,
+//   preco: 1500,
+//   quantidadeP: 0,
+//   quantidadeM: 0,
+//   quantidadeG: 0,
+//   desconto: 2,
+// }
+router.post("/produtos/cadastrar/", async (req, res) => {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  const newProduto = req.body;
+  try {
+    service.insertProduto(newProduto);
+    res.status(201).send("Cadastro Efetuado com sucesso!");
+  } catch (e) {
+    res.status(422).send(e.message);
+  }
+});
 
 // subtrair quantidades de produtos com um tamanho selecionado
+// endpoint: //produtos/subtrair/:id
+// method: "put"
+// body: {quantidade: 4, tamanho: "m"}
+router.put("/produtos/subtrair/:id", async (req, res) => {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  const subtrair = req.body;
+  const idProduto = req.params.id;
+  try {
+    await service.subtrairProduto(subtrair, idProduto);
+    res.status(204).end();
+  } catch (e) {
+    res.status(422).send(e.message);
+  }
+});
 
 // Referentes a Cadastros e Dados Dadastrais  ---------------------------
 
@@ -64,6 +142,7 @@ router.get("/produtos/categoria/:id", async (req, res) => {
 // method: "post"
 // body: {email: "pedro@gmail.com", senha: "pedrinho123"}
 router.post("/usuarios/cadastro/novo", async (req, res) => {
+  res.setHeader("Access-Control-Allow-Origin", "*");
   const newUsuario = req.body;
   try {
     service.insertCadastro(newUsuario);
@@ -77,6 +156,7 @@ router.post("/usuarios/cadastro/novo", async (req, res) => {
 // endpoint: /usuarios/info/inativar/:id_usuario
 // method: "put"
 router.put("/usuarios/info/inativar/:id", async (req, res) => {
+  res.setHeader("Access-Control-Allow-Origin", "*");
   try {
     const idUsuario = req.params.id;
     service.inativarUsuarioById(idUsuario);
@@ -90,6 +170,7 @@ router.put("/usuarios/info/inativar/:id", async (req, res) => {
 // endpoint: /login/:email/:senha
 // method: "get"
 router.get("/login/:email/:senha", async (req, res) => {
+  res.setHeader("Access-Control-Allow-Origin", "*");
   const email = req.params.email;
   const senha = req.params.senha;
   const dados = { email, senha };
@@ -115,6 +196,7 @@ router.get("/login/:email/:senha", async (req, res) => {
 //   complemento: "joca",
 // }
 router.put("/usuarios/info/update/:id", async (req, res) => {
+  res.setHeader("Access-Control-Allow-Origin", "*");
   const idUsuario = req.params.id;
   const newDados = req.body;
   try {
@@ -130,6 +212,7 @@ router.put("/usuarios/info/update/:id", async (req, res) => {
 // method: "put"
 // body: {email: "joaozinho@gamil.com", senha: "joaozinho"}
 router.put("/usuarios/update/:id", async (req, res) => {
+  res.setHeader("Access-Control-Allow-Origin", "*");
   const newDados = req.body;
   const idUsuario = req.params.id;
   try {
@@ -144,6 +227,7 @@ router.put("/usuarios/update/:id", async (req, res) => {
 // endpoint: /usuarios/adm/update/:id
 // method: "put"
 router.put("/usuarios/adm/update/:id", async (req, res) => {
+  res.setHeader("Access-Control-Allow-Origin", "*");
   const idUsuario = req.params.id;
   try {
     service.changeAdmUsuario(idUsuario);
@@ -159,6 +243,7 @@ router.put("/usuarios/adm/update/:id", async (req, res) => {
 // endpoint: /pedidos/info
 // method: "get"
 router.get("/pedidos/info", async (req, res) => {
+  res.setHeader("Access-Control-Allow-Origin", "*");
   try {
     const pedidosJSON = await service.getPedidos();
     res.status(200).json(pedidosJSON);
@@ -171,6 +256,7 @@ router.get("/pedidos/info", async (req, res) => {
 // endpoint: /pedidos/info/usuarios/:id_usuario
 // method: "get"
 router.get("/pedidos/info/usuarios/:id", async (req, res) => {
+  res.setHeader("Access-Control-Allow-Origin", "*");
   try {
     const idUsuario = req.params.id;
     const pedidosJSON = await service.getPedidosByIdUsuario(idUsuario);
@@ -184,6 +270,7 @@ router.get("/pedidos/info/usuarios/:id", async (req, res) => {
 // endpoint: /pedidos/info/:id_pedido
 // method: "get"
 router.get("/pedidos/info/:id", async (req, res) => {
+  res.setHeader("Access-Control-Allow-Origin", "*");
   try {
     const idPedido = req.params.id;
     const pedidoJSON = await service.getInfoPedidoById(idPedido);
@@ -197,6 +284,7 @@ router.get("/pedidos/info/:id", async (req, res) => {
 // endpoint: /pedidos/info/produtos/:id_pedido
 // method: "get"
 router.get("/pedidos/info/produtos/:id", async (req, res) => {
+  res.setHeader("Access-Control-Allow-Origin", "*");
   try {
     const idPedido = req.params.id;
     const produtosJSON = await service.getProdutosByPedidoId(idPedido);
@@ -211,6 +299,7 @@ router.get("/pedidos/info/produtos/:id", async (req, res) => {
 // method: "post"
 // body: {idUsuario: 3, precoTotal: "1200", idFormaPagamento: 2}
 router.post("/pedidos/novo", async (req, res) => {
+  res.setHeader("Access-Control-Allow-Origin", "*");
   const newPedido = req.body;
   try {
     service.insertPedido(newPedido);
@@ -239,6 +328,7 @@ router.post("/pedidos/novo", async (req, res) => {
 //   ...
 // ]
 router.post("/pedidos/produtos/novo/:id", async (req, res) => {
+  res.setHeader("Access-Control-Allow-Origin", "*");
   const idPedido = req.params.id;
   const produtos = req.body;
   try {
@@ -254,6 +344,7 @@ router.post("/pedidos/produtos/novo/:id", async (req, res) => {
 // method: "put"
 // body: {status: 2, idFormaPagamento: 1 }
 router.put("/pedidos/info/:id", async function (req, res) {
+  res.setHeader("Access-Control-Allow-Origin", "*");
   const updatePedido = req.body;
   const idPedidoUpdate = req.params.id;
   try {
