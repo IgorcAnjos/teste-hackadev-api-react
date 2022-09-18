@@ -3,8 +3,8 @@ const { default: axios } = require("axios");
 
 const url = process.env.URL_DB;
 
-beforeEach(() => {
-  axios({
+beforeEach(async () => {
+  await axios({
     url: `${url}`,
     method: "delete",
   });

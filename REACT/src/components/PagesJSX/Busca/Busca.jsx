@@ -5,8 +5,11 @@ import ProdutoCatalogo from "../../ProdutoCatalogo/ProdutoCatalogo";
 import Footer from "../../Footer/Footer";
 
 import "./Busca.css";
+import { useContext } from "react";
+import { BuscaContext } from "../../../contexts/Busca";
 
-const Busca = ({ ListaDeBusca, setBuscar }) => {
+const Busca = () => {
+  const { ListaDeBusca, setBuscar } = useContext(BuscaContext);
   return (
     <div className="container-busca">
       <Header texto={"Busca"} />

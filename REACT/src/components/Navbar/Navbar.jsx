@@ -7,18 +7,11 @@ import Menu from "../Menu/Menu";
 import Carrinho from "../Carrinho/Carrinho";
 
 import "./Navbar.css";
+import { useContext } from "react";
+import { CarrinhoContext } from "../../contexts/Carrinho";
 
-const Navbar = ({
-  listaCarrinho,
-  handleAdicaoListaCarrinnho,
-  handleSubtracaoListaCarrinnho,
-  handleExcluirListaCarrinnho,
-  subTotal,
-  handleSubTotal,
-  ListaDeProdutos,
-  setBuscar,
-  login,
-}) => {
+const Navbar = ({ login }) => {
+  const { listaCarrinho } = useContext(CarrinhoContext);
   let totalNoCarrinho = 0;
   listaCarrinho.map((produto) => (totalNoCarrinho += produto.quantidade));
   const [abrirMenu, setAbrirMenu] = useState(false);
@@ -61,22 +54,10 @@ const Navbar = ({
           </li>
         </ul>
       </nav>
-      <Menu
-        abrirMenu={abrirMenu}
-        setAbrirMenu={setAbrirMenu}
-        setBuscar={setBuscar}
-        login={login}
-      />
+      <Menu abrirMenu={abrirMenu} setAbrirMenu={setAbrirMenu} />
       <Carrinho
         abrirCarrinho={abrirCarrinho}
         setAbrirCarrinho={setAbrirCarrinho}
-        listaCarrinho={listaCarrinho}
-        handleAdicaoListaCarrinnho={handleAdicaoListaCarrinnho}
-        handleSubtracaoListaCarrinnho={handleSubtracaoListaCarrinnho}
-        handleExcluirListaCarrinnho={handleExcluirListaCarrinnho}
-        subTotal={subTotal}
-        handleSubTotal={handleSubTotal}
-        ListaDeProdutos={ListaDeProdutos}
         totalNoCarrinho={totalNoCarrinho}
       />
     </>

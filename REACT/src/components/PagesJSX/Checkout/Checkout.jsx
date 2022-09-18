@@ -8,8 +8,11 @@ import PagamentoCartao from "../../PagamentoCartao/PagamentoCartao";
 import DetalhesCompra from "../../DetalhesCompra/DetalhesCompra";
 
 import "./Checkout.css";
+import { useContext } from "react";
+import { CarrinhoContext } from "../../../contexts/Carrinho";
 
-const Checkout = ({ listaCarrinho }) => {
+const Checkout = () => {
+  const { listaCarrinho } = useContext(CarrinhoContext);
   const [formaDePagamento, setFormaDePagamento] = useState("cartaoCredito");
   return (
     <div className="checkout-container">

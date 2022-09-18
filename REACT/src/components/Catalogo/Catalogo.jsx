@@ -1,11 +1,21 @@
-import { React, useState } from "react";
+import { React, useContext, useState } from "react";
 import { BiGridVertical, BiDotsVertical } from "react-icons/bi";
+import { Produtos } from "../../contexts/Produtos";
 
 import ProdutoCatalogo from "../ProdutoCatalogo/ProdutoCatalogo";
 
 import "./Catalogo.css";
 
-const Catalogo = ({ ListaDeProdutos }) => {
+const Catalogo = () => {
+  const { listaDeProdutos } = useContext(Produtos);
+
+  const produtos =
+    listaDeProdutos === true
+      ? true
+      : listaDeProdutos.length > 1
+      ? listaDeProdutos
+      : false;
+
   const [colunas, setColunas] = useState("coluna2");
   return (
     <section className="catalogo">
@@ -30,12 +40,8 @@ const Catalogo = ({ ListaDeProdutos }) => {
         </div>
       </div>
       <section className="flex-container">
-        {ListaDeProdutos.map((item) =>
-          item.quantidade_p === 0 &&
-          item.quantidade_m === 0 &&
-          item.quantidade_g === 0 ? (
-            ""
-          ) : (
+        {produtos !== true ? (
+          produtos.map((item) => (
             <div key={item.id}>
               <ProdutoCatalogo
                 id={item.id}
@@ -46,7 +52,9 @@ const Catalogo = ({ ListaDeProdutos }) => {
                 colunas={colunas}
               />
             </div>
-          )
+          ))
+        ) : (
+          <h1>Loading</h1>
         )}
       </section>
     </section>

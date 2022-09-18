@@ -4,8 +4,11 @@ import { Link } from "react-router-dom";
 import { IoIosClose } from "react-icons/io";
 
 import "./Menu.css";
+import { useContext } from "react";
+import { BuscaContext } from "../../contexts/Busca";
 
-const Menu = ({ abrirMenu, setAbrirMenu, setBuscar, login }) => {
+const Menu = ({ abrirMenu, setAbrirMenu }) => {
+  const { setBuscar } = useContext(BuscaContext);
   const [largura, setLargura] = useState(window.innerWidth);
 
   const fetchLarguraAtual = () => {
@@ -52,15 +55,15 @@ const Menu = ({ abrirMenu, setAbrirMenu, setBuscar, login }) => {
             </section>
             <section id="login">
               <li className="navbar item">
-                {login.length === 0 ? (
-                  <Link to="/login">
-                    <p className="navbar-text">ENTRAR</p>
-                  </Link>
-                ) : (
-                  <Link to="/">
+                {/* {login.length === 0 ? ( */}
+                <Link to="/login">
+                  <p className="navbar-text">ENTRAR</p>
+                </Link>
+                {/* ) : ( */}
+                {/* <Link to="/">
                     <p className="navbar-text">KingsMan</p>
-                  </Link>
-                )}
+                  </Link> */}
+                {/* )} */}
               </li>
             </section>
             <section id="buscar">

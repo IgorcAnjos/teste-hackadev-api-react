@@ -1,8 +1,21 @@
-import React from "react";
+import { useState, useEffect } from "react";
 import { Auth } from ".";
 
 const AuthProvider = ({ children }) => {
-  return <Auth.Provider>{children}</Auth.Provider>;
+  // Funções pertinentes ao login
+  const [login, setLogin] = useState(
+    localStorage.login ? JSON.parse(localStorage.login) : []
+  );
+
+  const handleLoginAction = () => {
+    setLogin([...login, { login: true }]);
+    console.log(login);
+  };
+
+  useEffect(() => {
+    localStorage.login = JSON.stringify(login);
+  }, [login]);
+  return <Auth.Provider value={{}}>{children}</Auth.Provider>;
 };
 
 export default AuthProvider;

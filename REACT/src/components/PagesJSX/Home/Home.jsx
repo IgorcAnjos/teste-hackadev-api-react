@@ -8,34 +8,14 @@ import Navbar from "../../Navbar/Navbar";
 
 import "./Home.css";
 
-const Home = ({
-  ListaDeProdutos,
-  listaCarrinho,
-  handleAdicaoListaCarrinnho,
-  handleSubtracaoListaCarrinnho,
-  handleExcluirListaCarrinnho,
-  subTotal,
-  handleSubTotal,
-  setBuscar,
-  login,
-}) => {
+const Home = () => {
   return (
     <div className="container">
-      <Navbar
-        listaCarrinho={listaCarrinho}
-        handleAdicaoListaCarrinnho={handleAdicaoListaCarrinnho}
-        handleSubtracaoListaCarrinnho={handleSubtracaoListaCarrinnho}
-        handleExcluirListaCarrinnho={handleExcluirListaCarrinnho}
-        subTotal={subTotal}
-        handleSubTotal={handleSubTotal}
-        ListaDeProdutos={ListaDeProdutos}
-        setBuscar={setBuscar}
-        login={login}
-      />
+      <Navbar />
       <div className="espacamento"></div>
-      {login.length === 0 ? <FacaLogin /> : ""}
+      {/* {login.length === 0 ? <FacaLogin /> : ""} */}
       <Banner />
-      <Catalogo ListaDeProdutos={ListaDeProdutos} />
+      <Catalogo />
       <Footer />
     </div>
   );

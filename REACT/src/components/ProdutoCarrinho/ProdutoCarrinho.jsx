@@ -1,16 +1,26 @@
 import React from "react";
+import { useContext } from "react";
 import { Link } from "react-router-dom";
+import { CarrinhoContext } from "../../contexts/Carrinho";
+import { Produtos } from "../../contexts/Produtos";
 
 import "./ProdutoCarrinho.css";
 
-function ProdutoCarrinho({
-  produto,
-  handleAdicaoListaCarrinnho,
-  handleSubtracaoListaCarrinnho,
-  handleExcluirListaCarrinnho,
-  handleSubTotal,
-  ListaDeProdutos,
-}) {
+function ProdutoCarrinho({ produto }) {
+  const {
+    handleAdicaoListaCarrinnho,
+    handleSubtracaoListaCarrinnho,
+    handleExcluirListaCarrinnho,
+  } = useContext(CarrinhoContext);
+  const { listaDeProdutos } = useContext(Produtos);
+
+  const ListaDeProdutos =
+    listaDeProdutos === true
+      ? true
+      : listaDeProdutos.length > 1
+      ? listaDeProdutos
+      : false;
+
   const novoid =
     produto.id.length === 3 ? produto.id.substring(0, 2) : produto.id[0];
 

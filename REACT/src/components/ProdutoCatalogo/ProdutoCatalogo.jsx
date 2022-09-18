@@ -34,11 +34,13 @@ const ProdutoCatalogo = ({ id, imagem, nome, preco, colunas, desconto }) => {
                 ? {}
                 : { textDecoration: "line-through", color: "crimson" }
             }
-          >{`R$ ${preco.toFixed(2)}`}</p>
+          >{`R$ ${Number(preco).toFixed(2)}`}</p>
           <p
             className="desconto"
             style={desconto === 0 ? { display: "none" } : {}}
-          >{`R$ ${(preco - preco * (desconto / 100)).toFixed(2)}`}</p>
+          >{`R$ ${(Number(preco) - Number(preco) * (desconto / 100)).toFixed(
+            2
+          )}`}</p>
         </div>
       </div>
     </Link>

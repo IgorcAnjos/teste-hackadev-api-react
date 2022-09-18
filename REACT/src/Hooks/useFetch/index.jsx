@@ -6,8 +6,8 @@ function useFetch(url, method, data = null) {
   const [error, setError] = useState(null);
   const [dataResponse, setDataResponse] = useState(null);
 
-  const fetchData = async () => {
-    if (method === "get") {
+  useEffect(() => {
+    const getFetchData = () => {
       setLoading(true);
       axios
         .get(url)
@@ -20,7 +20,9 @@ function useFetch(url, method, data = null) {
         .finally(() => {
           setLoading(false);
         });
-    } else if (method === "post") {
+    };
+
+    const postFetchData = () => {
       setLoading(true);
       axios
         .post(url, data)
@@ -33,15 +35,25 @@ function useFetch(url, method, data = null) {
         .finally(() => {
           setLoading(false);
         });
-    } else if (method === "put") {
+    };
+
+    const putFetchData = () => {
+      setLoading(true);
       axios
         .put(url, data)
-        .then((response) => setDataResponse(response.status))
-        .catch((err) =>
-          setError({ status: err.response.status, message: err.response.data })
-        )
-        .finally(() => setLoading(false));
-    } else if (method === "delete") {
+        .then((response) => {
+          setDataResponse(response.status);
+        })
+        .catch((err) => {
+          setError({ status: err.response.status, message: err.response.data });
+        })
+        .finally(() => {
+          setLoading(false);
+        });
+    };
+
+    const deleteFetchData = () => {
+      setLoading(true);
       axios
         .delete(url)
         .then((response) => {
@@ -53,12 +65,22 @@ function useFetch(url, method, data = null) {
         .finally(() => {
           setLoading(false);
         });
-    }
-  };
+    };
 
-  useEffect(() => {
+    const fetchData = async () => {
+      if (method === "get") {
+        getFetchData();
+      } else if (method === "post") {
+        postFetchData();
+      } else if (method === "put") {
+        putFetchData();
+      } else if (method === "delete") {
+        deleteFetchData();
+      }
+    };
+
     fetchData();
-  }, [url]);
+  }, [url, data, method]);
 
   return { dataResponse, loading, error };
 }

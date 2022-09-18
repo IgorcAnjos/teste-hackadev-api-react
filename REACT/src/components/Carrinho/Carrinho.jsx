@@ -1,23 +1,15 @@
-import { React } from "react";
+import { React, useContext } from "react";
 import { Link } from "react-router-dom";
 import { AiOutlineArrowLeft } from "react-icons/ai";
 
 import ProdutoCarrinho from "../ProdutoCarrinho/ProdutoCarrinho";
 
 import "./Carrinho.css";
+import { CarrinhoContext } from "../../contexts/Carrinho";
 
-const Carrinho = ({
-  abrirCarrinho,
-  setAbrirCarrinho,
-  listaCarrinho,
-  handleAdicaoListaCarrinnho,
-  handleSubtracaoListaCarrinnho,
-  handleExcluirListaCarrinnho,
-  subTotal,
-  handleSubTotal,
-  ListaDeProdutos,
-  totalNoCarrinho,
-}) => {
+const Carrinho = ({ abrirCarrinho, setAbrirCarrinho, totalNoCarrinho }) => {
+  const { listaCarrinho, subTotal } = useContext(CarrinhoContext);
+
   return abrirCarrinho ? (
     <div className="sombra-carrinho">
       <div
@@ -42,14 +34,7 @@ const Carrinho = ({
           <ul className="carrinho-produtos">
             {listaCarrinho.map((produto) => (
               <li key={produto.id}>
-                <ProdutoCarrinho
-                  produto={produto}
-                  handleAdicaoListaCarrinnho={handleAdicaoListaCarrinnho}
-                  handleSubtracaoListaCarrinnho={handleSubtracaoListaCarrinnho}
-                  handleExcluirListaCarrinnho={handleExcluirListaCarrinnho}
-                  handleSubTotal={handleSubTotal}
-                  ListaDeProdutos={ListaDeProdutos}
-                />
+                <ProdutoCarrinho produto={produto} />
               </li>
             ))}
           </ul>
