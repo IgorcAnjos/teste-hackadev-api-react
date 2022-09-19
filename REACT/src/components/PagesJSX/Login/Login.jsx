@@ -1,33 +1,52 @@
-import React from "react";
+import React, { useState } from "react";
+import { useContext } from "react";
 import { Link } from "react-router-dom";
+import { Auth } from "../../../contexts/Auth";
 
 import Header from "../../Header/Header";
-import InputCheckout from "../../InputCheckout/InputCheckout";
 
 import "./Login.css";
 
-const Login = ({ handleLoginAction }) => {
+const Login = () => {
+  const { setEmail, setSenha } = useContext(Auth);
+  const [loginEmail, setLoginEmail] = useState("");
+  const [loginSenha, setLoginSenha] = useState("");
   return (
     <main className="login-main">
       <Header texto="Login" />
       <section className="login-section">
         <form className="login-form" action="">
-          <InputCheckout
-            texto="E-mail"
-            type="email"
-            nome="email-usuario"
-            id="email-usuario"
-            size="50"
-            maxlength="50"
-          />
-          <InputCheckout
-            texto="Senha"
-            type="password"
-            nome="senha-usuario"
-            id="senha-usuario"
-            size="20"
-            maxLength="20"
-          />
+          <div className="input-checkout">
+            <label className="label-texto" htmlFor="email-usuario">
+              E-mail
+            </label>
+            <input
+              className="input"
+              type="email"
+              name="email-usuario"
+              id="email-usuario"
+              size="50"
+              maxLength="50"
+              required
+              onBlur={(e) => setLoginEmail(e.target.value)}
+            />
+          </div>
+          <div className="input-checkout">
+            <label className="label-texto" htmlFor="senha-usuario">
+              Senha
+            </label>
+            <input
+              className="input"
+              type="password"
+              name="senha-usuario"
+              id="senha-usuario"
+              size="20"
+              maxLength="20"
+              required
+              onBlur={(e) => setLoginSenha(e.target.value)}
+            />
+          </div>
+
           <Link to="/" className="login-link">
             Esqueceu sua senha?
           </Link>
@@ -36,7 +55,8 @@ const Login = ({ handleLoginAction }) => {
             <button
               className="login-btn"
               onClick={() => {
-                handleLoginAction();
+                setEmail(loginEmail);
+                setSenha(loginSenha);
               }}
             >
               Entrar

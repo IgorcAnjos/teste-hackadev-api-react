@@ -2,7 +2,7 @@ import React from "react";
 
 import Banner from "../../Banner/Banner";
 import Catalogo from "../../Catalogo/Catalogo";
-import FacaLogin from "../../FacaLogin/FacaLogin";
+// import FacaLogin from "../../FacaLogin/FacaLogin";
 import Footer from "../../Footer/Footer";
 import Navbar from "../../Navbar/Navbar";
 

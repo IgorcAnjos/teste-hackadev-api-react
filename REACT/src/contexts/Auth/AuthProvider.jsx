@@ -1,21 +1,23 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Auth } from ".";
+import useHandleAuthLoginFetch from "../../Utils/HandleAuthLoginFetch";
 
 const AuthProvider = ({ children }) => {
-  // Funções pertinentes ao login
-  const [login, setLogin] = useState(
-    localStorage.login ? JSON.parse(localStorage.login) : []
+  const [email, setEmail] = useState(null);
+  const [senha, setSenha] = useState(null);
+
+  const responseLogin = useHandleAuthLoginFetch(email, senha);
+  console.log(responseLogin);
+
+  if (typeof responseLogin === "object") {
+    localStorage.login = JSON.stringify(responseLogin);
+  }
+
+  return (
+    <Auth.Provider value={{ responseLogin, setEmail, setSenha }}>
+      {children}
+    </Auth.Provider>
   );
-
-  const handleLoginAction = () => {
-    setLogin([...login, { login: true }]);
-    console.log(login);
-  };
-
-  useEffect(() => {
-    localStorage.login = JSON.stringify(login);
-  }, [login]);
-  return <Auth.Provider value={{}}>{children}</Auth.Provider>;
 };
 
 export default AuthProvider;

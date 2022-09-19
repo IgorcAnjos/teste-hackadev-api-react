@@ -74,21 +74,21 @@ export const atualizarDadosDeProdutos = (newDadosProduto, idProduto) => {
 
 // Inserir produtos no banco de dados
 export const insertProduto = (newProduto) => {
-  // if (
-  //   newProduto.imagem === undefined ||
-  //   newProduto.nome === undefined ||
-  //   newProduto.descricao === undefined ||
-  //   newProduto.idCategoria === undefined ||
-  //   newProduto.preco === undefined ||
-  //   newProduto.quantidadeP === undefined ||
-  //   newProduto.quantidadeM === undefined ||
-  //   newProduto.quantidadeG === undefined ||
-  //   newProduto.desconto === undefined
-  // ) {
-  //   throw new Error("Todos os campos são obrigatórios");
-  // } else {
-  data.insertProduto(newProduto);
-  // }
+  if (
+    newProduto.imagem === undefined ||
+    newProduto.nome === undefined ||
+    newProduto.descricao === undefined ||
+    newProduto.idCategoria === undefined ||
+    newProduto.preco === undefined ||
+    newProduto.quantidadeP === undefined ||
+    newProduto.quantidadeM === undefined ||
+    newProduto.quantidadeG === undefined ||
+    newProduto.desconto === undefined
+  ) {
+    throw new Error("Todos os campos são obrigatórios");
+  } else {
+    data.insertProduto(newProduto);
+  }
 };
 
 // subtrair quantidades de produtos com um tamanho selecionado

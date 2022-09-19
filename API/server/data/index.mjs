@@ -154,37 +154,37 @@ VALUES
 -------------------- Usuário 1 -------------------------
 INSERT INTO usuarios (ativo, email, senha, data)
 VALUES
-    (true, 'joze@gmail.com', MD5('joze@gmail.com'), now());
+    (true, 'igor@gmail.com', MD5('igor@gmail.com'), now());
 
 INSERT INTO dados_usuarios (id_usuario, nome_completo, pais, cep, logradouro, cidade, estado, complemento)
 VALUES
-    (1, 'joze da silva', 'Brasil', '71717171', 'R. joze Qd joze lote 1 ', 'joze dos campos', 'GO', 'joze');
+    (1, 'Igor Anjos', 'Brasil', '74717171', 'R. Igor Qd joze lote 1 ', 'Igor dos campos', 'GO', 'Igor');
 
 -------------------- Usuário 2 -------------------------
 INSERT INTO usuarios (ativo, email, senha, data)
 VALUES
-    (true, 'joao@gmail.com', MD5('joao@gmail.com'), now());
+    (true, 'gustavoAlves@gmail.com', MD5('gustavoAlves@gmail.com'), now());
 
 INSERT INTO dados_usuarios (id_usuario, nome_completo, pais, cep, logradouro, cidade, estado, complemento)
 VALUES
-    (2, 'joao da silva', 'Brasil', '72717171', 'R. joao Qd joao lote 1 ', 'joao dos campos', 'GO', 'joao');
+    (2, 'Gustavo Alves', 'Brasil', '74727171', 'R. Gustavo Qd joao lote 1 ', 'Gustavo dos campos', 'GO', 'Gustavo');
 
 -------------------- Usuário 3 -------------------------
 INSERT INTO usuarios (ativo, email, senha, data)
 VALUES
-    (true, 'eric@gmail.com', MD5('eric@gmail.com'), now());
+    (true, 'gustavohenrique@gmail.com', MD5('gustavohenrique@gmail.com'), now());
 
 INSERT INTO dados_usuarios (id_usuario, nome_completo, pais, cep, logradouro, cidade, estado, complemento)
 VALUES
-    (3, 'Eric da silva', 'Brasil', '73717171', 'R. Eric Qd Eric lote 1 ', 'Eric dos campos', 'GO', 'Eric');
+    (3, 'Gustavo Henrique', 'Brasil', '74737171', 'R. Gustavo Qd Eric lote 1 ', 'Gustavo dos campos', 'GO', 'Eric');
 
 
 -------------------- Pedidos  ------------------------
 INSERT INTO pedidos (id_usuario, preco_total, id_forma_pagamento, status, data, hora)
 VALUES
     (1, 100, 1, 1, now(), CURRENT_TIME(0)),
-    (2, 4000, 1, 1, now(),  CURRENT_TIME(0)),
-    (3, 587, 3, 1,  now(), CURRENT_TIME(0)),
+    (1, 4000, 1, 1, now(),  CURRENT_TIME(0)),
+    (2, 587, 3, 1,  now(), CURRENT_TIME(0)),
     (3, 600, 3, 1,  now(), CURRENT_TIME(0));
 
 
