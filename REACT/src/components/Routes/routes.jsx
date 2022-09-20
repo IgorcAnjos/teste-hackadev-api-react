@@ -1,5 +1,9 @@
-import { React, useEffect, useState } from "react";
-import { Route, Routes, BrowserRouter as Router } from "react-router-dom";
+import {
+  Route,
+  Routes,
+  BrowserRouter as Router,
+  Navigate,
+} from "react-router-dom";
 
 import Home from "../PagesJSX/Home/Home";
 import Cadastro from "../PagesJSX/Cadastro/Cadastro";
@@ -8,38 +12,66 @@ import Checkout from "../PagesJSX/Checkout/Checkout";
 import Busca from "../PagesJSX/Busca/Busca";
 import Login from "../PagesJSX/Login/Login";
 import Duvidas from "../PagesJSX/DuvidasESac/Duvidas";
+import InfoUsuariosProvider from "../../contexts/Clientes/ClientesProvider";
 
 const RouterPages = () => {
-  // Funções pertinentes ao login
-  const [login, setLogin] = useState(
-    localStorage.login ? JSON.parse(localStorage.login) : []
-  );
-
-  const handleLoginAction = () => {
-    setLogin([...login, { login: true }]);
-    console.log(login);
+  const isAutenticado = () => {
+    if (localStorage.login === undefined) {
+      return false;
+    } else {
+      const autenticado =
+        JSON.parse(localStorage.login).id &&
+        JSON.parse(localStorage.login).token
+          ? true
+          : false;
+      return autenticado;
+    }
   };
 
-  useEffect(() => {
-    localStorage.login = JSON.stringify(login);
-  }, [login]);
+  const AuthRoute = ({ children }) => {
+    return isAutenticado() ? <>{children}</> : <Navigate to="/login" replace />;
+  };
 
+  const NotAuthRoute = ({ children }) => {
+    return !isAutenticado() ? <>{children}</> : <Navigate to="/" replace />;
+  };
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<Home isAutenticado={isAutenticado} />} />
         <Route
           path="/login"
-          element={<Login handleLoginAction={handleLoginAction} />}
+          element={
+            <NotAuthRoute>
+              <Login />
+            </NotAuthRoute>
+          }
         />
         <Route
           path="/cadastro"
-          element={<Cadastro handleLoginAction={handleLoginAction} />}
+          element={
+            <NotAuthRoute>
+              <Cadastro />
+            </NotAuthRoute>
+          }
         />
-        <Route path="/checkout" element={<Checkout />} />
+        <Route
+          path="/checkout"
+          element={
+            <InfoUsuariosProvider>
+              <AuthRoute>
+                <Checkout />
+              </AuthRoute>
+            </InfoUsuariosProvider>
+          }
+        />
         <Route path="/busca" element={<Busca />} />
         <Route path="/duvidas" element={<Duvidas />} />
-        <Route path="/produto/:id" element={<Produto login={login} />} />
+        <Route
+          path="/produto/:id"
+          element={<Produto isAutenticado={isAutenticado} />}
+        />
+        <Route path="*" element={<Home />} />
       </Routes>
     </Router>
   );

@@ -1,8 +1,8 @@
-import React from "react";
 import useFetch from "../../Hooks/useFetch";
 
 const useHandleAuthLoginFetch = (email, senha) => {
-  const url = `http://localhost/login/${email}/${senha}`;
+  const urlApi = process.env.REACT_APP_DEFURLAPI;
+  const url = `${urlApi}login/${email}/${senha}`;
   const method = "get";
 
   const objetoFetchLogin = useFetch(url, method);

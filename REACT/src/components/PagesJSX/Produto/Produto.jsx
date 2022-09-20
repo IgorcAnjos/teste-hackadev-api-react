@@ -10,7 +10,7 @@ import FacaLogin from "../../FacaLogin/FacaLogin";
 import { Produtos } from "../../../contexts/Produtos";
 import { CarrinhoContext } from "../../../contexts/Carrinho";
 
-const Produto = ({ login }) => {
+const Produto = ({ isAutenticado }) => {
   const { handleAdicaoListaCarrinnho } = useContext(CarrinhoContext);
   const { listaDeProdutos } = useContext(Produtos);
 
@@ -32,11 +32,13 @@ const Produto = ({ login }) => {
 
   const produto = findProduto[0];
 
+  const login = isAutenticado();
+
   return (
     <div className="cont">
       <Navbar />
       <div className="espacamento"></div>
-      {/* {login.length === 0 ? <FacaLogin /> : ""} */}
+      {!login ? <FacaLogin /> : ""}
 
       {ListaDeProdutos !== true ? (
         <>
@@ -89,23 +91,17 @@ const Produto = ({ login }) => {
                   id="tamanho"
                 >
                   {produto.quantidade_p !== 0 ? (
-                    <option value={"p"} selected>
-                      P
-                    </option>
+                    <option value={"p"}>P</option>
                   ) : (
                     ""
                   )}
                   {produto.quantidade_m !== 0 ? (
-                    <option value={"m"} selected>
-                      M
-                    </option>
+                    <option value={"m"}>M</option>
                   ) : (
                     ""
                   )}
                   {produto.quantidade_g !== 0 ? (
-                    <option value={"g"} selected>
-                      G
-                    </option>
+                    <option value={"g"}>G</option>
                   ) : (
                     ""
                   )}

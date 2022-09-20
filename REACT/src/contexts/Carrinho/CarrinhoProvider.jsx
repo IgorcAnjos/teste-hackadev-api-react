@@ -104,6 +104,11 @@ const CarrinhoProvider = ({ children }) => {
     localStorage.listaCarrinho = JSON.stringify(listaCarrinho);
   }, [listaCarrinho]);
 
+  // Zerar carrinho
+
+  const zeraCarrinho = () => {
+    setListaCarrinho([]);
+  };
   return (
     <CarrinhoContext.Provider
       value={{
@@ -112,6 +117,7 @@ const CarrinhoProvider = ({ children }) => {
         handleSubtracaoListaCarrinnho,
         handleExcluirListaCarrinnho,
         subTotal,
+        zeraCarrinho,
       }}
     >
       {children}

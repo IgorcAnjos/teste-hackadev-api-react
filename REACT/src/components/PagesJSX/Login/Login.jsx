@@ -43,6 +43,7 @@ const Login = () => {
               size="20"
               maxLength="20"
               required
+              autoComplete="on"
               onBlur={(e) => setLoginSenha(e.target.value)}
             />
           </div>

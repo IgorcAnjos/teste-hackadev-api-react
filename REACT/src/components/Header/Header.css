@@ -19,7 +19,7 @@
     padding-left: 3vw;
   }
 
-  .sair-descricao a {
+  .sair-descricao div {
     text-decoration: none;
   }
 
@@ -47,7 +47,7 @@
     height: 10vh;
     color: #002855;
   }
-  .sair-descricao a {
+  .sair-descricao div {
     text-decoration: none;
     font-size: 4vh;
     color: #002855;

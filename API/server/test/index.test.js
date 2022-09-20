@@ -22,12 +22,14 @@ test("Deve obter o status 200", async function () {
 // Referentes a Produtos  -----------------------------------------------
 
 // Pegar todos os produtos do banco
-test("01 PRODUTOS _ Deve obter o status 200 - GET", async function () {
+test.only("01 PRODUTOS _ Deve obter o status 200 - GET", async function () {
   const response = await axios({
     url: `${url}produtos/info/`,
     method: "get",
   });
   const status = response.status;
+  const data = response.data;
+  console.log(data);
   expect(status).toEqual(200);
 });
 
