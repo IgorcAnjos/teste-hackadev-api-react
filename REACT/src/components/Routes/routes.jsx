@@ -16,6 +16,8 @@ import InfoUsuariosProvider from "../../contexts/Clientes/ClientesProvider";
 import Usuario from "../PagesJSX/Usuario";
 import Pedidos from "../PagesJSX/Pedidos";
 import ProdutoPorPedido from "../PagesJSX/PedidosProdutos";
+import GeraPedido from "../PagesJSX/GeraPedido";
+import GeraPedidoProvider from "../../contexts/GeraPedido/GeraPedidoProvider";
 
 const RouterPages = () => {
   const isAutenticado = () => {
@@ -32,6 +34,7 @@ const RouterPages = () => {
   };
 
   const AuthRoute = ({ children }) => {
+    console.log("Auth");
     return isAutenticado() ? <>{children}</> : <Navigate to="/login" replace />;
   };
 
@@ -61,11 +64,11 @@ const RouterPages = () => {
         <Route
           path="/checkout"
           element={
-            <InfoUsuariosProvider>
-              <AuthRoute>
-                <Checkout />
-              </AuthRoute>
-            </InfoUsuariosProvider>
+            // <InfoUsuariosProvider>
+            <AuthRoute>
+              <Checkout />
+            </AuthRoute>
+            // </InfoUsuariosProvider>
           }
         />
         <Route path="/busca" element={<Busca />} />
@@ -100,6 +103,16 @@ const RouterPages = () => {
                 <ProdutoPorPedido />
               </AuthRoute>
             </InfoUsuariosProvider>
+          }
+        />
+        <Route
+          path="/checkout/gerapedido/:id"
+          element={
+            <GeraPedidoProvider>
+              <AuthRoute>
+                <GeraPedido />
+              </AuthRoute>
+            </GeraPedidoProvider>
           }
         />
 

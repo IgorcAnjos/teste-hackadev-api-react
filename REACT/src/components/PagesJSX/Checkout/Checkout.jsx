@@ -1,5 +1,5 @@
 import { React, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 
 import Header from "../../Header/Header";
 import BotoesCheckout from "../../BotoesCheckout/BotoesCheckout";
@@ -10,18 +10,16 @@ import "./Checkout.css";
 
 import { useContext } from "react";
 import { CarrinhoContext } from "../../../contexts/Carrinho";
+import HandlePedidos from "../../../Utils/HandleNewPedido";
 import { InfoUsuarios } from "../../../contexts/Clientes";
+import { useEffect } from "react";
 
 const Checkout = () => {
-  const [loading, setloading] = useState(false);
   const { listaCarrinho } = useContext(CarrinhoContext);
-  const {
-    setIdFormaDePagamento,
-    setUsuario,
-    setListaCarrinho,
-    efeturarPedidos,
-  } = useContext(InfoUsuarios);
   const [formaDePagamento, setFormaDePagamento] = useState(1);
+  useEffect(() => {
+    localStorage.pagamento = JSON.stringify(formaDePagamento);
+  }, [formaDePagamento]);
 
   const UsuarioLogado = localStorage.login
     ? JSON.parse(localStorage.login)
@@ -46,25 +44,11 @@ const Checkout = () => {
       )}
       <DetalhesCompra listaCarrinho={listaCarrinho} />
       <section className="finalizar-compra">
-        <Link to="#" className="comprar">
-          <button
-            className="botao-comprar"
-            onClick={() => {
-              setloading(true);
-              setIdFormaDePagamento(formaDePagamento);
-              setListaCarrinho(listaCarrinho);
-              setUsuario(UsuarioLogado);
-              let status = true;
-              setTimeout(() => {
-                status = efeturarPedidos();
-              }, 100);
-              if (status === "ok") {
-                setloading(false);
-              }
-            }}
-          >
-            Finalizar Pedido
-          </button>
+        <Link
+          to={`/checkout/gerapedido/${formaDePagamento}`}
+          className="comprar"
+        >
+          <button className="botao-comprar">Finalizar Pedido</button>
         </Link>
       </section>
     </div>

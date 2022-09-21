@@ -1,64 +1,54 @@
-import axios from "axios";
-import { useState } from "react";
+import useFetch from "../../Hooks/useFetch";
 
-const HandlePedidos = ({ dataEst1, dataEst2, finalizar }) => {
-  console.log(
-    `dataEst1: ${dataEst1} dataEst2: ${dataEst2} finalizar: ${finalizar}`
-  );
-  let dataResponse = null;
-  let error = null;
-  let loading = true;
-  let resposta = null;
+const useHandleFetchInsertPedido = () => {
+  const urlAPI = process.env.REACT_APP_DEFURLAPI;
 
-  const url = process.env.REACT_APP_DEFURLAPI;
-  const Estagio1 = (data) => {
-    let status = true;
-    axios
-      .post(`${url}pedidos/novo`, data)
-      .then((response) => {
-        dataResponse = response.status;
-        status = "ok";
-      })
-      .catch((err) => {
-        error = { status: err.response.status, message: err.response.data };
-      })
-      .finally(() => {
-        loading = false;
-      });
-    return status;
+  const idFormaDePagamento = JSON.parse(localStorage.pagamento);
+  const listaCarrinho = JSON.parse(localStorage.listaCarrinho);
+
+  const usuario = JSON.parse(localStorage.login);
+
+  const ProdutosPedidos = listaCarrinho.map((item) => {
+    const idProduto = Number(String(item.id).substring(0, item.id.length - 1));
+    const precoSubtotal = Number(item.preco) * Number(item.quantidade);
+    const quantidade = Number(item.quantidade);
+    const tamanho = String(item.id).slice(-1);
+    return { idProduto, precoSubtotal, quantidade, tamanho };
+  });
+
+  const calcTotal = () => {
+    let total = 0;
+    listaCarrinho.map(
+      (produto) => (total += produto.quantidade * produto.preco)
+    );
+
+    return total;
   };
 
-  const Estagio2 = (data, idPedido) => {
-    let status = true;
-    axios
-      .post(`${url}pedidos/produtos/novo/${idPedido}`, data)
-      .then((response) => {
-        dataResponse = response.status;
-        status = "ok";
-      })
-      .catch((err) => {
-        error = { status: err.response.status, message: err.response.data };
-      })
-      .finally(() => {
-        loading = false;
-      });
-    return status;
-  };
+  const precoTotal = calcTotal();
 
-  const inserirPedidoProdutos = async () => {
-    if (Estagio1(dataEst1) === "ok") {
-      const status = Estagio2(dataEst2, dataResponse.id);
-      if (status === "ok") {
-        return "sucess";
-      }
-    }
+  const Pedido = {
+    idUsuario: usuario.id,
+    precoTotal,
+    idFormaDePagamento: idFormaDePagamento,
   };
+  console.log(Pedido);
 
-  if (dataEst1 !== null && dataEst2 !== null) {
-    resposta = inserirPedidoProdutos();
-  }
-  console.log(`resposta: ${resposta}`);
-  return resposta;
+  const objetoIdPedidoInserido = useFetch(`${urlAPI}pedidos/novo`, "post", {
+    idUsuario: Pedido.idUsuario,
+    precoTotal: Pedido.precoTotal,
+    idFormaPagamento: Pedido.idFormaDePagamento,
+  });
+  console.log(objetoIdPedidoInserido);
+
+  const ListaDePedidos =
+    objetoIdPedidoInserido.dataResponse !== null
+      ? objetoIdPedidoInserido.dataResponse
+      : objetoIdPedidoInserido.error !== null
+      ? false
+      : true;
+
+  return ListaDePedidos;
 };
 
-export default HandlePedidos;
+export default useHandleFetchInsertPedido;

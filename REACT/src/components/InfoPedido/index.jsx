@@ -5,7 +5,6 @@ import "./InfoPedido.css";
 
 const InfoPedido = ({ idPedido, total, status, formaPagamento }) => {
   const precoTotal = String(total).substring(1, total.length).replace(",", "");
-  console.log(precoTotal);
   return (
     <main className="pedido-info">
       <h2>Pedido nº {idPedido}</h2>

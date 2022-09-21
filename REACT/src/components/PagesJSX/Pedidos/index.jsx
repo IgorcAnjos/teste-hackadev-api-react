@@ -11,7 +11,6 @@ import { BsTypeH1 } from "react-icons/bs";
 
 const Pedidos = () => {
   const { pedidosUsuario } = useContext(InfoUsuarios);
-  console.log(pedidosUsuario);
   return (
     <main className="main">
       <section className="pedidos-main">

@@ -76,6 +76,7 @@ CREATE TABLE compras (
     quantidade     INT        NOT NULL,
     tamanho        VARCHAR(1) NOT NULL
     
+    
 );
 
 -------------------Inserir dados------------------------

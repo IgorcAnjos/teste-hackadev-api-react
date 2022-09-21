@@ -17,7 +17,6 @@ const useHandleFetchPedidosCliente = () => {
       ? false
       : true;
 
-  console.log(ListaDePedidos);
   return ListaDePedidos;
 };
 

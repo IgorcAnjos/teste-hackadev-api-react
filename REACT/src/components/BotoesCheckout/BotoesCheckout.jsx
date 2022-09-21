@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import { BsFillCreditCard2FrontFill } from "react-icons/bs";
 import { MdOutlineMobileFriendly } from "react-icons/md";
 import { IoMdBarcode } from "react-icons/io";
 
 import "./BotoesCheckout.css";
+import { InfoUsuarios } from "../../contexts/Clientes";
 
 function BotoesCheckout({ formaDePagamento, setFormaDePagamento }) {
   return (
