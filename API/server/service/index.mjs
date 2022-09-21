@@ -266,7 +266,7 @@ export const getProdutosByPedidoId = async (idPedido) => {
 };
 
 // Inserir um novo pedido
-export const insertPedido = (newPedido) => {
+export const insertPedido = async (newPedido) => {
   if (
     newPedido.idUsuario === undefined ||
     newPedido.precoTotal === undefined ||
@@ -276,7 +276,8 @@ export const insertPedido = (newPedido) => {
       "Está faltando um desses: idUsuario, precoTotal, idFormaPagamento"
     );
   } else {
-    data.insertPedido(newPedido);
+    const id = await data.insertPedido(newPedido);
+    return id;
   }
 };
 

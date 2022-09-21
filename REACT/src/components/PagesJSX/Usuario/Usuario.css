@@ -1,0 +1,145 @@
+@import url("../../reset/reset.css");
+@import url("https://fonts.googleapis.com/css2?family=Ibarra+Real+Nova&display=swap");
+
+* {
+  font-family: "Ibarra Real Nova", serif;
+}
+
+@media (max-width: 500px) {
+  .user-main {
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    overflow-y: scroll;
+    background: #dcdfe5;
+    height: 92vh;
+  }
+
+  .perfil {
+    display: flex;
+    flex-direction: column;
+    margin-top: 3vh;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .icone-coroa {
+    font-size: 12vw;
+    color: #002855;
+  }
+
+  .icone {
+    color: #dcdfe5;
+    font-size: 7.5vw;
+    margin-top: 0.5vh;
+    margin-right: 1vh;
+  }
+
+  .nome-perfil {
+    font-size: 7vw;
+    margin-bottom: 10vh;
+  }
+
+  .principal {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 10vh;
+  }
+
+  .dados-user {
+    background-color: #002855;
+    border-radius: 5px;
+    margin-bottom: 2vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 90%;
+  }
+
+  .dados-user h3 {
+    color: #fafafa;
+    font-size: 6vw;
+    margin-left: 1vh;
+    margin-top: 1vh;
+    margin-bottom: 1vh;
+  }
+}
+
+@media (min-width: 500px) {
+  .main {
+    width: 500px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+  }
+  .user-main {
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    width: 500px;
+    height: 100vh;
+    overflow-y: scroll;
+    background: #dcdfe5;
+    height: 92vh;
+    border-left: 1px solid #dcdfe5;
+    border-top: 1px solid #dcdfe5;
+  }
+
+  .perfil {
+    display: flex;
+    flex-direction: column;
+    margin-top: 3vh;
+    align-items: center;
+    justify-content: center;
+    width: 500px;
+  }
+
+  .icone-coroa {
+    font-size: 5vw;
+    color: #002855;
+  }
+
+  .icone {
+    color: #dcdfe5;
+    font-size: 2vw;
+    margin-top: 0.5vh;
+    margin-right: 1vh;
+  }
+
+  .nome-perfil {
+    font-size: 3vw;
+    margin-bottom: 10vh;
+  }
+
+  .principal {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 10vh;
+    width: 500px;
+  }
+
+  .dados-user {
+    background-color: #002855;
+    border-radius: 5px;
+    margin-bottom: 2vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 90%;
+  }
+
+  .dados-user h3 {
+    color: #fafafa;
+    font-size: 2vw;
+    margin-left: 1vh;
+    margin-top: 1vh;
+    margin-bottom: 1vh;
+  }
+}

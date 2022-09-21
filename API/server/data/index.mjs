@@ -82,7 +82,7 @@ CREATE TABLE pedidos (
 CREATE TABLE compras (
     id             SERIAL     PRIMARY KEY,
     id_pedido      INT REFERENCES pedidos(id),
-    id_produto     INT        NOT NULL,
+    id_produto     INT REFERENCES produtos(id)
     preco_subtotal MONEY      NOT NULL,
     quantidade     INT        NOT NULL,
     tamanho        VARCHAR(1) NOT NULL
@@ -367,7 +367,7 @@ export const subtrairProduto = (quantidadeTamanhoTexto, sobra, idProduto) => {
   bancoDeDados.none(query);
 };
 
-// Referentes a Cadastros e Dados Dadastrais  ---------------------------
+// Referentes a Cadastros e Dados Cadastrais  ---------------------------
 
 // Cadastrar novos usuarios
 export const insertCadastro = (newUsuario) => {
@@ -458,16 +458,17 @@ export const getInfoPedidoById = (idPedido) => {
 // Pegar produtos de um pedido
 
 export const getProdutosByPedidoId = (idPedido) => {
-  return bancoDeDados.query(`SELECT * FROM compras WHERE id_pedido = $1;`, [
-    idPedido,
-  ]);
+  return bancoDeDados.query(
+    `SELECT cp.id, cp.id_pedido, cp.id_produto, cp.preco_subtotal, cp.quantidade, cp.tamanho, pd.nome FROM compras as cp JOIN produtos as pd ON cp.id_produto = pd.id WHERE id_pedido = $1;`,
+    [idPedido]
+  );
 };
 
 // Inserir um novo pedido
 export const insertPedido = (newPedido) => {
   const { idUsuario, precoTotal, idFormaPagamento } = newPedido;
-  bancoDeDados.none(
-    "INSERT INTO pedidos (id_usuario, preco_total, id_forma_pagamento, status, data, hora) VALUES ($1, $2, $3, 1, now(), CURRENT_TIME(0));",
+  return bancoDeDados.one(
+    "INSERT INTO pedidos (id_usuario, preco_total, id_forma_pagamento, status, data, hora) VALUES ($1, $2, $3, 1, now(), CURRENT_TIME(0)) RETURNING id",
     [idUsuario, precoTotal, idFormaPagamento]
   );
 };

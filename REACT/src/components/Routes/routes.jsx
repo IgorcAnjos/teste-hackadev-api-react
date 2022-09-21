@@ -13,6 +13,9 @@ import Busca from "../PagesJSX/Busca/Busca";
 import Login from "../PagesJSX/Login/Login";
 import Duvidas from "../PagesJSX/DuvidasESac/Duvidas";
 import InfoUsuariosProvider from "../../contexts/Clientes/ClientesProvider";
+import Usuario from "../PagesJSX/Usuario";
+import Pedidos from "../PagesJSX/Pedidos";
+import ProdutoPorPedido from "../PagesJSX/PedidosProdutos";
 
 const RouterPages = () => {
   const isAutenticado = () => {
@@ -71,6 +74,35 @@ const RouterPages = () => {
           path="/produto/:id"
           element={<Produto isAutenticado={isAutenticado} />}
         />
+        <Route
+          path="/usuario"
+          element={
+            <AuthRoute>
+              <Usuario />
+            </AuthRoute>
+          }
+        />
+        <Route
+          path="/usuario/pedidos"
+          element={
+            <InfoUsuariosProvider>
+              <AuthRoute>
+                <Pedidos />
+              </AuthRoute>
+            </InfoUsuariosProvider>
+          }
+        />
+        <Route
+          path="/pedidos/Detalhes/:id"
+          element={
+            <InfoUsuariosProvider>
+              <AuthRoute>
+                <ProdutoPorPedido />
+              </AuthRoute>
+            </InfoUsuariosProvider>
+          }
+        />
+
         <Route path="*" element={<Home />} />
       </Routes>
     </Router>

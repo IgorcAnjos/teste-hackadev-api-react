@@ -1,0 +1,24 @@
+@import url("../../reset/reset.css");
+@import url("https://fonts.googleapis.com/css2?family=Ibarra+Real+Nova&display=swap");
+
+* {
+  font-family: "Ibarra Real Nova", serif;
+}
+
+@media (max-width: 500px) {
+  .main {
+    background-color: #002855;
+  }
+  .pedidos-status {
+    height: 92vh;
+  }
+}
+
+@media (min-width: 500px) {
+  .main {
+    background-color: #002855;
+  }
+  .pedidos-status {
+    height: 92vh;
+  }
+}

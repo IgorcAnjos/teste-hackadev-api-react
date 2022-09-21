@@ -284,8 +284,8 @@ router.get("/pedidos/info/produtos/:id", async (req, res) => {
 router.post("/pedidos/novo", async (req, res) => {
   const newPedido = req.body;
   try {
-    service.insertPedido(newPedido);
-    res.status(201).send("Pedido Efetuado com sucesso!");
+    const id = await service.insertPedido(newPedido);
+    res.status(201).json(id);
   } catch (e) {
     res.status(422).send(e.message);
   }

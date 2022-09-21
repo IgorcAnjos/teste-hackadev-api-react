@@ -71,7 +71,7 @@ CREATE TABLE pedidos (
 CREATE TABLE compras (
     id             SERIAL     PRIMARY KEY,
     id_pedido      INT REFERENCES pedidos(id),
-    id_produto     INT        NOT NULL,
+    id_produto     INT REFERENCES produtos(id) ,
     preco_subtotal MONEY      NOT NULL,
     quantidade     INT        NOT NULL,
     tamanho        VARCHAR(1) NOT NULL

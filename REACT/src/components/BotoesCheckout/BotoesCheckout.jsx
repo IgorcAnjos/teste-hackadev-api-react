@@ -18,7 +18,7 @@ function BotoesCheckout({ formaDePagamento, setFormaDePagamento }) {
               className="selecao-forma"
               id="cartao-credito"
               style={
-                formaDePagamento === "cartaoCredito"
+                formaDePagamento === 1
                   ? {
                       border: "1px solid #002855",
                       color: "#002855",
@@ -27,7 +27,7 @@ function BotoesCheckout({ formaDePagamento, setFormaDePagamento }) {
                   : {}
               }
               onClick={() => {
-                setFormaDePagamento("cartaoCredito");
+                setFormaDePagamento(1);
               }}
             >
               <BsFillCreditCard2FrontFill className="i" />
@@ -39,7 +39,7 @@ function BotoesCheckout({ formaDePagamento, setFormaDePagamento }) {
               className="selecao-forma"
               id="boleto"
               style={
-                formaDePagamento === "boleto"
+                formaDePagamento === 2
                   ? {
                       border: "1px solid #002855",
                       color: "#002855",
@@ -48,7 +48,7 @@ function BotoesCheckout({ formaDePagamento, setFormaDePagamento }) {
                   : {}
               }
               onClick={() => {
-                setFormaDePagamento("boleto");
+                setFormaDePagamento(2);
               }}
             >
               <IoMdBarcode className="i" />
@@ -60,7 +60,7 @@ function BotoesCheckout({ formaDePagamento, setFormaDePagamento }) {
               className="selecao-forma"
               id="pix"
               style={
-                formaDePagamento === "pix"
+                formaDePagamento === 3
                   ? {
                       border: "1px solid #002855",
                       color: "#002855",
@@ -69,7 +69,7 @@ function BotoesCheckout({ formaDePagamento, setFormaDePagamento }) {
                   : {}
               }
               onClick={() => {
-                setFormaDePagamento("pix");
+                setFormaDePagamento(3);
               }}
             >
               <MdOutlineMobileFriendly className="i" />

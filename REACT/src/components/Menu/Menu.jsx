@@ -11,6 +11,23 @@ const Menu = ({ abrirMenu, setAbrirMenu }) => {
   const { setBuscar } = useContext(BuscaContext);
   const [largura, setLargura] = useState(window.innerWidth);
 
+  const isAutenticado = () => {
+    if (localStorage.login === undefined) {
+      return false;
+    } else {
+      const autenticado =
+        JSON.parse(localStorage.login).id &&
+        JSON.parse(localStorage.login).token
+          ? true
+          : false;
+      return autenticado;
+    }
+  };
+
+  const email = isAutenticado()
+    ? JSON.parse(localStorage.login).email
+    : "Perfil";
+
   const fetchLarguraAtual = () => {
     const novaLargura = window.innerWidth;
     setLargura(novaLargura);
@@ -55,15 +72,15 @@ const Menu = ({ abrirMenu, setAbrirMenu }) => {
             </section>
             <section id="login">
               <li className="navbar item">
-                {/* {login.length === 0 ? ( */}
-                <Link to="/login">
-                  <p className="navbar-text">ENTRAR</p>
-                </Link>
-                {/* ) : ( */}
-                {/* <Link to="/">
-                    <p className="navbar-text">KingsMan</p>
-                  </Link> */}
-                {/* )} */}
+                {!isAutenticado() ? (
+                  <Link to="/login">
+                    <p className="navbar-text">ENTRAR</p>
+                  </Link>
+                ) : (
+                  <Link to="/usuario">
+                    <p className="navbar-text">{email}</p>
+                  </Link>
+                )}
               </li>
             </section>
             <section id="buscar">
