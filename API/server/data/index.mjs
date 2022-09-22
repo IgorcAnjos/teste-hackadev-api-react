@@ -10,14 +10,14 @@ export const zeraDb = () => {
   bancoDeDados.none(
     `
     -------------------Apagar tabelas-----------------------
-DROP TABLE IF EXISTS produtos;
-DROP TABLE IF EXISTS categorias;
-DROP TABLE IF EXISTS dados_usuarios;
-DROP TABLE IF EXISTS compras;
-DROP TABLE IF EXISTS pedidos;
-DROP TABLE IF EXISTS status_pedidos;
-DROP TABLE IF EXISTS forma_pagamento;
-DROP TABLE IF EXISTS usuarios;
+    DROP TABLE IF EXISTS compras;
+    DROP TABLE IF EXISTS produtos;
+    DROP TABLE IF EXISTS categorias;
+    DROP TABLE IF EXISTS dados_usuarios;
+    DROP TABLE IF EXISTS pedidos;
+    DROP TABLE IF EXISTS status_pedidos;
+    DROP TABLE IF EXISTS forma_pagamento;
+    DROP TABLE IF EXISTS usuarios;
 
 -------------------Criar tabelas------------------------
 CREATE TABLE categorias (

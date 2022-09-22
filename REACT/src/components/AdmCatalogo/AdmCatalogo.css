@@ -1,0 +1,122 @@
+@import url("../reset/reset.css");
+@import url("https://fonts.googleapis.com/css2?family=Ibarra+Real+Nova&display=swap");
+
+* {
+  font-family: "Ibarra Real Nova", serif;
+}
+
+@media (max-width: 500px) {
+  .produto {
+    margin-left: 0.5vh;
+    margin-right: 0.5vh;
+    display: flex;
+    flex-direction: row;
+    background-color: #dcdfe5;
+    border-radius: 5px 5px 0 0;
+    justify-content: space-around;
+  }
+  .imagem {
+    margin: 0.1vh;
+  }
+
+  .img-produto {
+    height: 200px;
+    border-radius: 2px;
+  }
+  .descricao {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .descricao p {
+    color: black;
+    text-decoration: none;
+  }
+
+  .alterar {
+    padding-top: 0.5vh;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    background-color: #dcdfe5;
+    margin-left: 0.5vh;
+    margin-right: 0.5vh;
+    margin-bottom: 1vh;
+    border-radius: 0 0 5px 5px;
+  }
+  .icone-alterar {
+    color: #dcdfe5;
+    font-size: 3vh;
+    padding-left: 0.5vh;
+    padding-right: 0.5vh;
+  }
+
+  .botao-alterar {
+    background-color: #002855;
+    border-radius: 8px;
+    border: none;
+    transition: 0;
+  }
+  .alterar p {
+    font-size: 2vh;
+  }
+}
+
+@media (min-width: 500px) {
+  .produto {
+    margin-left: 0.5vh;
+    margin-right: 0.5vh;
+    display: flex;
+    flex-direction: row;
+    background-color: #dcdfe5;
+    border-radius: 5px 5px 0 0;
+    justify-content: center;
+  }
+  .imagem {
+    margin: 0.1vh;
+    margin-right: 5vh;
+  }
+
+  .img-produto {
+    height: 300px;
+    border-radius: 2px;
+  }
+  .descricao {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .descricao p {
+    color: black;
+    text-decoration: none;
+    font-size: 3vh;
+  }
+
+  .alterar {
+    padding-top: 0.5vh;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    background-color: #dcdfe5;
+    margin-left: 0.5vh;
+    margin-right: 0.5vh;
+    margin-bottom: 1vh;
+    border-radius: 0 0 5px 5px;
+  }
+  .icone-alterar {
+    color: #dcdfe5;
+    font-size: 3vh;
+    padding-left: 0.5vh;
+    padding-right: 0.5vh;
+  }
+
+  .botao-alterar {
+    background-color: #002855;
+    border-radius: 8px;
+    border: none;
+  }
+}

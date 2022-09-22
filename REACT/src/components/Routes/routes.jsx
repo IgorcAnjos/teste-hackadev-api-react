@@ -18,6 +18,7 @@ import Pedidos from "../PagesJSX/Pedidos";
 import ProdutoPorPedido from "../PagesJSX/PedidosProdutos";
 import GeraPedido from "../PagesJSX/GeraPedido";
 import GeraPedidoProvider from "../../contexts/GeraPedido/GeraPedidoProvider";
+import AdmProdutos from "../PagesJSX/ADMProduto";
 
 const RouterPages = () => {
   const isAutenticado = () => {
@@ -113,6 +114,14 @@ const RouterPages = () => {
                 <GeraPedido />
               </AuthRoute>
             </GeraPedidoProvider>
+          }
+        />
+        <Route
+          path="/usuario/adm/produtos"
+          element={
+            <AuthRoute>
+              <AdmProdutos />
+            </AuthRoute>
           }
         />
 

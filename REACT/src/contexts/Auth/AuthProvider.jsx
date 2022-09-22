@@ -13,7 +13,13 @@ const AuthProvider = ({ children }) => {
   }
 
   return (
-    <Auth.Provider value={{ responseLogin, setEmail, setSenha }}>
+    <Auth.Provider
+      value={{
+        // responseLogin,
+        setEmail,
+        setSenha,
+      }}
+    >
       {children}
     </Auth.Provider>
   );

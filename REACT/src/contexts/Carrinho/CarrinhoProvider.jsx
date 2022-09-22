@@ -87,6 +87,10 @@ const CarrinhoProvider = ({ children }) => {
     setListaCarrinho(novaListaCarrinho);
   };
 
+  const handleZerarCarrinho = () => {
+    setListaCarrinho([]);
+  };
+
   // Funções pertinentes ao subtotal da soma de todos os produtos no carrinho
   const [subTotal, setSubTotal] = useState(0);
 
@@ -118,6 +122,7 @@ const CarrinhoProvider = ({ children }) => {
         handleExcluirListaCarrinnho,
         subTotal,
         zeraCarrinho,
+        handleZerarCarrinho,
       }}
     >
       {children}

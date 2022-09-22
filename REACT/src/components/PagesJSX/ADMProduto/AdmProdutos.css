@@ -1,0 +1,35 @@
+@import url("../../reset/reset.css");
+@import url("https://fonts.googleapis.com/css2?family=Ibarra+Real+Nova&display=swap");
+
+* {
+  font-family: "Ibarra Real Nova", serif;
+}
+
+@media (max-width: 500px) {
+  .main-adm__produtos {
+    margin: 0 auto;
+    text-decoration: none;
+  }
+  .produtos {
+    display: flex;
+    flex-direction: column;
+    background-color: #002855;
+    width: 100%;
+    margin: 0 auto;
+  }
+}
+
+@media (min-width: 500px) {
+  .main-adm__produtos {
+    margin: 0 auto;
+  }
+  .produtos {
+    margin-top: 1vh;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    background-color: #002855;
+    margin: 0 auto;
+  }
+}

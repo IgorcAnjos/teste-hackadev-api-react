@@ -10,8 +10,6 @@ import "./Checkout.css";
 
 import { useContext } from "react";
 import { CarrinhoContext } from "../../../contexts/Carrinho";
-import HandlePedidos from "../../../Utils/HandleNewPedido";
-import { InfoUsuarios } from "../../../contexts/Clientes";
 import { useEffect } from "react";
 
 const Checkout = () => {

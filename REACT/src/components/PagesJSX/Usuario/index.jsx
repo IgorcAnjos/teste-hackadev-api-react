@@ -11,6 +11,9 @@ import "./Usuario.css";
 
 const Usuario = () => {
   const email = JSON.parse(localStorage.login).email;
+  const admin = JSON.parse(localStorage.login).admin;
+  console.log(admin);
+
   return (
     <main className="main">
       <section className="user-main">
@@ -36,6 +39,24 @@ const Usuario = () => {
             <h3>Pedidos</h3>
             <Link to="/usuario/pedidos">
               <GiMagnifyingGlass className="icone icone-lupa" />
+            </Link>
+          </div>
+          <div
+            className="dados-user pedidos"
+            style={{ display: admin === null ? "flex" : "none" }}
+          >
+            <h3>Adm Produtos</h3>
+            <Link to="/usuario/adm/produtos">
+              <FiEdit className="icone icone-edit" />
+            </Link>
+          </div>
+          <div
+            className="dados-user pedidos"
+            style={{ display: admin === null ? "flex" : "none" }}
+          >
+            <h3>Adm Usuários</h3>
+            <Link to="/usuario/adm/usuarios">
+              <FiEdit className="icone icone-edit" />
             </Link>
           </div>
         </section>
