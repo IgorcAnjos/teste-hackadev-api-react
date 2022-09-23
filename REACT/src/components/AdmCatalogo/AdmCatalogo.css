@@ -59,6 +59,59 @@
     border: none;
     transition: 0;
   }
+
+  .fechar {
+    border-radius: 4px;
+    cursor: pointer;
+    border: none;
+    background-color: #dcdfe5;
+    color: #002855;
+    font-size: 2vh;
+    position: absolute;
+    right: 0px;
+    top: 0;
+    display: block;
+  }
+
+  .modal-topo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #002855;
+  }
+
+  .modal-topo h3 {
+    margin-bottom: 0.3vh;
+  }
+
+  .modal-topo img {
+    border-radius: 5px;
+  }
+  .modal-form input,
+  .enviar-produto {
+    width: 100%;
+    height: 3.5vh;
+    border-radius: 4px;
+    font-size: 2.5vh;
+    border: none;
+    background-color: #002855;
+    color: #dcdfe5;
+    margin-bottom: 0.3vh;
+  }
+
+  .enviar-produto {
+    cursor: pointer;
+    margin-top: 1vh;
+    background-color: black;
+  }
+
+  .modal-form label {
+    display: flex;
+    justify-content: center;
+    color: #002855;
+    font-size: 2.5vh;
+    margin-top: 0.3vh;
+  }
   .alterar p {
     font-size: 2vh;
   }
@@ -88,6 +141,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
+    width: 60%;
   }
 
   .descricao p {
@@ -118,5 +172,66 @@
     background-color: #002855;
     border-radius: 8px;
     border: none;
+  }
+
+  .fechar {
+    border-radius: 4px;
+    cursor: pointer;
+    border: none;
+    background-color: #dcdfe5;
+    color: #002855;
+    font-size: 2vh;
+    position: absolute;
+    right: 0px;
+    top: 0;
+    display: block;
+  }
+
+  .modal-topo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #002855;
+  }
+
+  .modal-topo h3 {
+    margin-bottom: 0.3vh;
+  }
+
+  .modal-topo img {
+    border-radius: 5px;
+  }
+  .modal-form input,
+  .enviar-produto {
+    width: 100%;
+    height: 3.5vh;
+    border-radius: 4px;
+    font-size: 2.5vh;
+    border: none;
+    background-color: #002855;
+    color: #dcdfe5;
+    margin-bottom: 0.3vh;
+  }
+
+  .enviar-produto {
+    cursor: pointer;
+    margin-top: 1vh;
+    background-color: black;
+  }
+  .enviar-produto:hover {
+    background-color: #dcdfe5;
+    transition: 0.3s;
+    color: #002855;
+  }
+
+  .modal-form label {
+    display: flex;
+    justify-content: center;
+    color: #002855;
+    font-size: 2.5vh;
+    margin-top: 0.3vh;
+  }
+  .alterar p {
+    font-size: 2vh;
   }
 }

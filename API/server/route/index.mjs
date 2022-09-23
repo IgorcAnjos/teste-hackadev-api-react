@@ -12,6 +12,12 @@ router.get("/usuarios", async (req, res) => {
   res.json(usuariosJSON);
 });
 
+// Pegar dados de todos os usuários cadastrados
+router.get("/usuarios/dados", async (req, res) => {
+  const usuariosJSON = await service.getDadosUsuarios();
+  res.json(usuariosJSON);
+});
+
 // Zerar banco de dados -------------------------------------------------
 // zerar Banco de Dados endpoint: /
 // method: "delete"
@@ -130,10 +136,32 @@ router.put("/produtos/subtrair/:id", async (req, res) => {
 
 // Referentes a Cadastros e Dados Dadastrais  ---------------------------
 
+// Pegar dados de usuários cadastrados por id
+// endpoint: /usuarios/dados/:id_usuario
+// method: get
+router.get("/usuarios/dados/:id", async (req, res) => {
+  const idUsuario = req.params.id;
+  try {
+    const usuariosJSON = await service.getDadosUsuariosIyId(idUsuario);
+    res.json(usuariosJSON);
+  } catch (err) {
+    res.status(404).send(err.message);
+  }
+});
+
 // Cadastrar novos usuarios
 // endpoint: /usuarios/cadastro/novo
 // method: "post"
-// body: {email: "pedro@gmail.com", senha: "pedrinho123"}
+// body: {email: "pedro@gmail.com",
+// senha: "pedrinho123",
+// nomeCompleto: "Pedro da Silva",
+// pais: "Brasil",
+// cep: "74757171",
+// logradouro: "Casa do Pedro",
+// cidade: "Goiânia",
+// estado: "GO",
+// complemento: "Pedro",
+// }
 router.post("/usuarios/cadastro/novo", async (req, res) => {
   const newUsuario = req.body;
   try {

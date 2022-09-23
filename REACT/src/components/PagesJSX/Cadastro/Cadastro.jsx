@@ -1,20 +1,26 @@
 // import { useState, useContext } from "react";
 
+import { useContext } from "react";
+import { Link } from "react-router-dom";
+import { CadastroContext } from "../../../contexts/CadastroContext";
 import Header from "../../Header/Header";
 
 import "./Cadastro.css";
 
 const Cadastro = () => {
-  // const [cadastroNomeCompleto, setCadastroNomeCompleto] = useState(null);
-  // const [cadastroEmail, setCadastroEmail] = useState(null);
-  // const [cadastroSenha, setCadastroSenha] = useState(null);
-  // const [cadastroPais, setCadastroPais] = useState(null);
-  // const [cadastroCep, setCadastroCep] = useState(null);
-  // const [cadastroEndereco, setCadastroEndereco] = useState(null);
-  // const [cadastroCidade, setCadastroCidade] = useState(null);
-  // const [cadastroBairro, setCadastroBairro] = useState(null);
-  // const [cadastroEstado, setCadastroEstado] = useState(null);
-  // const [cadastroComplemento, setCadastroComplemento] = useState(null);
+  const {
+    setBairro,
+    setCep,
+    setCidade,
+    setComplemento,
+    setEmail,
+    setEndereco,
+    setEstado,
+    setPais,
+    setSenha,
+    setNomeCompleto,
+  } = useContext(CadastroContext);
+
   return (
     <main className="cadastro-main">
       <Header texto="Cadastro" />
@@ -32,7 +38,7 @@ const Cadastro = () => {
               size="50"
               maxLength="50"
               required
-              // onBlur={(e) => setCadastroNomeCompleto(e.target.value)}
+              onChange={(e) => setNomeCompleto(e.target.value)}
             />
           </div>
           <div className="input-checkout">
@@ -47,7 +53,7 @@ const Cadastro = () => {
               size="40"
               maxLength="40"
               required
-              // onBlur={(e) => setCadastroEmail(e.target.value)}
+              onChange={(e) => setEmail(e.target.value)}
             />
           </div>
           <div className="input-checkout">
@@ -62,7 +68,7 @@ const Cadastro = () => {
               size="20"
               maxLength="20"
               required
-              // onBlur={(e) => setCadastroSenha(e.target.value)}
+              onChange={(e) => setSenha(e.target.value)}
             />
           </div>
           <div className="input-checkout">
@@ -77,7 +83,7 @@ const Cadastro = () => {
               size="30"
               maxLength="30"
               required
-              // onBlur={(e) => setCadastroPais(e.target.value)}
+              onChange={(e) => setPais(e.target.value)}
             />
           </div>
           <div className="input-checkout">
@@ -91,7 +97,7 @@ const Cadastro = () => {
               id="endereco-cep"
               maxLength="8"
               required
-              // onBlur={(e) => setCadastroCep(e.target.value)}
+              onChange={(e) => setCep(e.target.value)}
             />
           </div>
           <div className="input-checkout">
@@ -106,7 +112,7 @@ const Cadastro = () => {
               size="50"
               maxLength="50"
               required
-              // onBlur={(e) => setCadastroEndereco(e.target.value)}
+              onChange={(e) => setEndereco(e.target.value)}
             />
           </div>
           <div className="input-checkout">
@@ -121,7 +127,7 @@ const Cadastro = () => {
               size="30"
               maxLength="30"
               required
-              // onBlur={(e) => setCadastroCidade(e.target.value)}
+              onChange={(e) => setCidade(e.target.value)}
             />
           </div>
           <div className="input-checkout">
@@ -136,7 +142,7 @@ const Cadastro = () => {
               size="30"
               maxLength="30"
               required
-              // onBlur={(e) => setCadastroBairro(e.target.value)}
+              onChange={(e) => setBairro(e.target.value)}
             />
           </div>
           <div className="input-checkout">
@@ -151,7 +157,7 @@ const Cadastro = () => {
               size="2"
               maxLength="2"
               required
-              // onBlur={(e) => setCadastroEstado(e.target.value)}
+              onChange={(e) => setEstado(e.target.value)}
             />
           </div>
           <div className="input-checkout">
@@ -166,15 +172,20 @@ const Cadastro = () => {
               size="50"
               maxLength="50"
               required
-              // onBlur={(e) => setCadastroComplemento(e.target.value)}
+              onChange={(e) => setComplemento(e.target.value)}
             />
           </div>
           <div className="enviar-cadastro">
-            <a href="../../home.html">
-              <button className="enviar-button" onClick={() => {}}>
+            <Link to="/cadastro/geracadastro">
+              <button
+                className="enviar-button"
+                onClick={() => {
+                  // c
+                }}
+              >
                 Enviar
               </button>
-            </a>
+            </Link>
           </div>
         </form>
       </section>

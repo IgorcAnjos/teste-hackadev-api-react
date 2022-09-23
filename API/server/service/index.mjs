@@ -1,9 +1,16 @@
 import * as data from "../data/index.mjs";
+import * as twilio from "../twilio/index.mjs";
 import pkg from "crypto-js";
 const { MD5 } = pkg;
 
 export const getUsuarios = async () => {
   const usuarios = await data.getUsuarios();
+  return usuarios;
+};
+
+// Pegar Dados de todos os usuarios cadastrados
+export const getDadosUsuarios = async () => {
+  const usuarios = await data.getDadosUsuarios();
   return usuarios;
 };
 // Zerar banco de dados -------------------------------------------------
@@ -123,9 +130,36 @@ export const subtrairProduto = async (subtrair, idProduto) => {
 
 // Referentes a Cadastros e Dados Dadastrais  ---------------------------
 
+// Pegar dados de usuários cadastrados por id
+export const getDadosUsuariosIyId = async (idUsuario) => {
+  const usuarios = await data.getDadosUsuariosIyId(idUsuario);
+  return usuarios;
+};
+
 // Cadastrar novos usuarios
 export const insertCadastro = (newUsuario) => {
-  if (newUsuario.email === undefined || newUsuario.senha === undefined) {
+  const {
+    email,
+    senha,
+    nomeCompleto,
+    pais,
+    cep,
+    logradouro,
+    cidade,
+    estado,
+    complemento,
+  } = newUsuario;
+  if (
+    email === undefined ||
+    senha === undefined ||
+    nomeCompleto === undefined ||
+    pais === undefined ||
+    cep === undefined ||
+    logradouro === undefined ||
+    cidade === undefined ||
+    estado === undefined ||
+    complemento === undefined
+  ) {
     throw new Error("Todos os campos são obrigatórios");
   } else {
     data.insertCadastro(newUsuario);
@@ -288,6 +322,7 @@ export const insertProdutosByPedidoId = (idPedido, produtos) => {
     throw new Error("É necessário a inserção de produtos");
   } else {
     data.insertProdutosByPedidoId(idPedido, produtos);
+    twilio.mensagemFinalizarCompra(produtos, idPedido);
   }
 };
 

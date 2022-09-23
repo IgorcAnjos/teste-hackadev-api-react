@@ -5,6 +5,7 @@ import Header from "../../Header/Header";
 
 import "./AdmProdutos.css";
 import AdmCatalogo from "../../AdmCatalogo";
+import ModalAtualizarProduto from "../../ModalAtualizarProduto";
 
 const AdmProdutos = () => {
   const { listaDeProdutos } = useContext(Produtos);
@@ -32,6 +33,8 @@ const AdmProdutos = () => {
                   qtdP={item.quantidade_p}
                   qtdM={item.quantidade_m}
                   qtdG={item.quantidade_g}
+                  descricao={item.descricao}
+                  desconto={item.desconto}
                 />
               </div>
             ))
@@ -40,6 +43,8 @@ const AdmProdutos = () => {
           )}
         </section>
       </section>
+
+      {/* <ModalAtualizarProduto /> */}
     </main>
   );
 };

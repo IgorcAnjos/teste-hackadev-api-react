@@ -12,7 +12,6 @@ import "./Usuario.css";
 const Usuario = () => {
   const email = JSON.parse(localStorage.login).email;
   const admin = JSON.parse(localStorage.login).admin;
-  console.log(admin);
 
   return (
     <main className="main">
@@ -55,7 +54,7 @@ const Usuario = () => {
             style={{ display: admin === null ? "flex" : "none" }}
           >
             <h3>Adm Usuários</h3>
-            <Link to="/usuario/adm/usuarios">
+            <Link to="/usuario/adm/usuariosEdit">
               <FiEdit className="icone icone-edit" />
             </Link>
           </div>

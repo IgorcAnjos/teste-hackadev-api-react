@@ -19,6 +19,9 @@ import ProdutoPorPedido from "../PagesJSX/PedidosProdutos";
 import GeraPedido from "../PagesJSX/GeraPedido";
 import GeraPedidoProvider from "../../contexts/GeraPedido/GeraPedidoProvider";
 import AdmProdutos from "../PagesJSX/ADMProduto";
+import CadastroContextProvider from "../../contexts/CadastroContext/CadastroContextProvider";
+import GeraCadastro from "../PagesJSX/GeraCadastro";
+import AdmEditUsers from "../PagesJSX/ADMUsuarios";
 
 const RouterPages = () => {
   const isAutenticado = () => {
@@ -57,9 +60,21 @@ const RouterPages = () => {
         <Route
           path="/cadastro"
           element={
-            <NotAuthRoute>
-              <Cadastro />
-            </NotAuthRoute>
+            <CadastroContextProvider>
+              <NotAuthRoute>
+                <Cadastro />
+              </NotAuthRoute>
+            </CadastroContextProvider>
+          }
+        />
+        <Route
+          path="/cadastro/geracadastro"
+          element={
+            <CadastroContextProvider>
+              <NotAuthRoute>
+                <GeraCadastro />
+              </NotAuthRoute>
+            </CadastroContextProvider>
           }
         />
         <Route
@@ -89,11 +104,11 @@ const RouterPages = () => {
         <Route
           path="/usuario/pedidos"
           element={
-            <InfoUsuariosProvider>
-              <AuthRoute>
+            <AuthRoute>
+              <InfoUsuariosProvider>
                 <Pedidos />
-              </AuthRoute>
-            </InfoUsuariosProvider>
+              </InfoUsuariosProvider>
+            </AuthRoute>
           }
         />
         <Route
@@ -121,6 +136,14 @@ const RouterPages = () => {
           element={
             <AuthRoute>
               <AdmProdutos />
+            </AuthRoute>
+          }
+        />
+        <Route
+          path="/usuario/adm/usuariosEdit"
+          element={
+            <AuthRoute>
+              <AdmEditUsers />
             </AuthRoute>
           }
         />

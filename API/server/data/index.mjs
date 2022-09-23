@@ -1,7 +1,11 @@
 import { bancoDeDados } from "../infra/index.mjs";
 
 export const getUsuarios = () => {
-  return bancoDeDados.query("SELECT * FROM usuarios");
+  return bancoDeDados.query("SELECT id, ativo, email FROM usuarios");
+};
+
+export const getDadosUsuarios = () => {
+  return bancoDeDados.query("SELECT * FROM dados_usuarios");
 };
 
 // Zerar banco de dados -------------------------------------------------
@@ -369,13 +373,72 @@ export const subtrairProduto = (quantidadeTamanhoTexto, sobra, idProduto) => {
 
 // Referentes a Cadastros e Dados Cadastrais  ---------------------------
 
+// Pegar dados de usuários cadastrados por id
+
+export const getDadosUsuariosIyId = (idUsuario) => {
+  const dados = bancoDeDados
+    .query("SELECT * FROM dados_usuarios WHERE id_usuario = $1", [idUsuario])
+    .then((dados) => {
+      if (dados.length === 0) {
+        throw new Error("Usuario não existe");
+      }
+
+      return dados;
+    })
+    .catch((error) => {
+      throw new Error(error.message);
+    });
+  return dados;
+};
+
 // Cadastrar novos usuarios
 export const insertCadastro = (newUsuario) => {
-  const { email, senha } = newUsuario;
-  bancoDeDados.none(
-    "INSERT INTO usuarios (ativo, email, senha, data) VALUES (true, $1, MD5($2), now());",
-    [email, senha]
-  );
+  const {
+    email,
+    senha,
+    nomeCompleto,
+    pais,
+    cep,
+    logradouro,
+    cidade,
+    estado,
+    complemento,
+  } = newUsuario;
+  bancoDeDados
+    .one(
+      "INSERT INTO usuarios (ativo, email, senha, data) VALUES (true, $1, MD5($2), now()) RETURNING id",
+      [email, senha]
+    )
+    .then((usuario) => {
+      bancoDeDados
+        .none(
+          `INSERT INTO dados_usuarios (id_usuario, nome_completo, pais, cep, logradouro, cidade, estado, complemento)
+      VALUES
+          ($1, $2, $3, $4, $5, $6, $7, $8)`,
+          [
+            usuario.id,
+            nomeCompleto,
+            pais,
+            cep,
+            logradouro,
+            cidade,
+            estado,
+            complemento,
+          ]
+        )
+        .catch((err) => {
+          bancoDeDados.none(
+            `INSERT INTO dados_usuarios (id_usuario, nome_completo, pais, cep, logradouro, cidade, estado, complemento)
+            VALUES
+                ($1, 'Perfil', 'Brasil', '74747474', 'Logradouro', 'Cidade', 'GO', 'Complemento')`,
+            [usuario.id]
+          );
+          throw new Error(err.message);
+        });
+    })
+    .catch((err) => {
+      throw new Error(err.message);
+    });
 };
 
 // Inativar usuarios cadastrados

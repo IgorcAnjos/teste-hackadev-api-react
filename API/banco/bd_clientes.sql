@@ -30,7 +30,7 @@ CREATE TABLE produtos (
 CREATE TABLE usuarios (
     id    SERIAL      PRIMARY KEY ,
     ativo BOOLEAN     NOT NULL,
-    email VARCHAR(50) NOT NULL,
+    email VARCHAR(50) NOT NULL UNIQUE,
     senha VARCHAR(32) NOT NULL,
     data  DATE        NOT NULL,
     admin BOOLEAN 

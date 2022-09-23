@@ -1,6 +1,8 @@
+import { useEffect } from "react";
 import { React, useContext, useState } from "react";
 import { BiGridVertical, BiDotsVertical } from "react-icons/bi";
 import { Produtos } from "../../contexts/Produtos";
+import useTestFetch from "../../Hooks/useTestFetch";
 
 import ProdutoCatalogo from "../ProdutoCatalogo/ProdutoCatalogo";
 
@@ -8,6 +10,12 @@ import "./Catalogo.css";
 
 const Catalogo = () => {
   const { listaDeProdutos } = useContext(Produtos);
+  const [testeListaDeProdutos, setTesteListaDeProdutos] = useState(true);
+  // const listaTeste = useTestFetch(
+  //   "https://heroku-teste-api.herokuapp.com/produtos/info",
+  //   "get"
+  // );
+  // console.log(listaTeste);
 
   const produtos =
     listaDeProdutos === true
