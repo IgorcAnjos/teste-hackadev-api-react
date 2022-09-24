@@ -7,8 +7,8 @@ const sendMessageWhatsappTwilio = async (mensagem) => {
       to: "whatsapp:+556281986987",
       body: `${mensagem}`,
     })
-    .then((response) => console.log(response.body))
-    .catch((err) => console.log(err.message));
+    .then((response) => console.log(response))
+    .catch((err) => console.log(err));
 };
 
 export const mensagemFinalizarCompra = (produtos, idPedido) => {
@@ -16,10 +16,11 @@ export const mensagemFinalizarCompra = (produtos, idPedido) => {
   produtos.map((produto) => {
     precoTotal += Number(produto.precoSubtotal);
   });
-  const mensagem = `Olá,
+  const mensagem = `
+  Olá,
   Seu pedido foi gerado:
   ID: ${idPedido}, 
-  Total: ${precoTotal}
+  Total: ${precoTotal.toFixed(2)}
   Confirme agora o Pagamento: 
   https://kingsman-apitest.netlify.app/usuario/pedidos
   `;

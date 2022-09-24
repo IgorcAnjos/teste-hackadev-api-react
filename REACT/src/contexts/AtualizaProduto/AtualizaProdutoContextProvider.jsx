@@ -11,6 +11,7 @@ const AtualizaProdutoContextProvider = ({ children }) => {
   const [quantidadeGProduto, setQuantidadeGProduto] = useState(0);
   const [imagemProduto, setImagemProduto] = useState("link");
   const [descontoProduto, setDescontoProduto] = useState(50);
+  const urlApi = process.env.REACT_APP_DEFURLAPI;
 
   const bodyUpdate = {
     imagem: imagemProduto,
@@ -22,18 +23,24 @@ const AtualizaProdutoContextProvider = ({ children }) => {
     quantidadeG: quantidadeGProduto,
     desconto: descontoProduto,
   };
+  console.log(bodyUpdate);
+  console.log(idProduto);
 
   return (
     <AtualizaProdutoContext.Provider
       value={{
+        urlApi,
         idProduto,
         bodyUpdate,
+        setIdProduto,
         setNomeProduto,
         setprecoProduto,
+        setDescricaoProduto,
         setQuantidadePProduto,
         setQuantidadeMProduto,
         setQuantidadeGProduto,
         setImagemProduto,
+        setDescontoProduto,
       }}
     >
       {children}

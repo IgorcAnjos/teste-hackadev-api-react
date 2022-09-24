@@ -11,6 +11,7 @@ const ProdutoPorPedido = () => {
   const parametro = useParams();
   const idPedido = parametro.id;
   const listaDeProdutosByPedidosId = useHandleFetchProdutosByPedidoId(idPedido);
+  console.log(listaDeProdutosByPedidosId);
 
   return (
     <main className="main-ppp">

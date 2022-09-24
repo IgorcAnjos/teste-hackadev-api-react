@@ -6,31 +6,48 @@
 }
 
 @media (max-width: 500px) {
+  .main {
+    overflow-y: scroll;
+    height: 100vh;
+  }
+
+  .main::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  .main::-webkit-scrollbar-track {
+    background: #002855;
+  }
+
+  .main::-webkit-scrollbar-thumb {
+    background-color: #dcdfe5;
+    width: 100%;
+  }
+
   .user-main {
     margin: 0 auto;
     display: flex;
     flex-direction: column;
     height: 100vh;
-    overflow-y: scroll;
-    background: #dcdfe5;
-    height: 92vh;
+    background: #fafafa;
+    height: 100vh;
   }
 
   .perfil {
     display: flex;
     flex-direction: column;
-    margin-top: 3vh;
+    margin-top: 2rem;
     align-items: center;
     justify-content: center;
   }
 
   .icone-coroa {
-    font-size: 12vw;
+    font-size: 4rem;
     color: #002855;
   }
 
   .icone {
-    color: #dcdfe5;
+    color: #002855;
     font-size: 7.5vw;
     margin-top: 0.5vh;
     margin-right: 1vh;
@@ -51,20 +68,36 @@
 
   .dados-user {
     background-color: #002855;
-    border-radius: 5px;
+    border-radius: 0.5rem;
+    padding-left: 0.5rem;
     margin-bottom: 2vh;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    align-items: center;
     width: 90%;
   }
 
-  .dados-user h3 {
+  .dados-user .link-user {
+    background-color: #dcdfe5;
+    height: 2.5rem;
+    width: 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.2rem;
+    border-radius: 0.5rem;
+    margin: 0.5rem;
+  }
+
+  .dados-user p {
     color: #fafafa;
-    font-size: 6vw;
+    font-size: 1.7rem;
     margin-left: 1vh;
     margin-top: 1vh;
     margin-bottom: 1vh;
+    width: 70%;
+    text-align: left;
   }
 }
 

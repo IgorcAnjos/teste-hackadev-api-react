@@ -6,11 +6,24 @@
 }
 
 @media (max-width: 500px) {
-  .main {
-    background-color: #002855;
-  }
   .pedidos-status {
-    height: 92vh;
+    background: #002855;
+    overflow-y: scroll;
+    height: 90vh;
+    color: #161616;
+  }
+
+  .pedidos-status::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  .pedidos-status::-webkit-scrollbar-track {
+    background: #002855;
+  }
+
+  .pedidos-status::-webkit-scrollbar-thumb {
+    background-color: #dcdfe5;
+    width: 100%;
   }
 }
 

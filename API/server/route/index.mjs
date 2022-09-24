@@ -84,7 +84,6 @@ router.get("/produtos/:id", async (req, res) => {
 //   desconto: 100,
 // }
 router.put("/produtos/atualizar/:id", async (req, res) => {
-  res.setHeader("Access-Control-Allow-Origin", "PUT");
   const newDadosProduto = req.body;
   const idProduto = req.params.id;
   try {

@@ -335,7 +335,7 @@ export const updatePedido = (idPedidoUpdate, updatePedido) => {
     updatePedido.idFormaPagamento === undefined
   ) {
     throw new Error(
-      "Está faltando um desses:status, precoTotal, idPedidoUpdate"
+      "Está faltando um desses:status, idFormaPagamento, idPedidoUpdate"
     );
   } else {
     data.updatePedido(idPedidoUpdate, updatePedido);

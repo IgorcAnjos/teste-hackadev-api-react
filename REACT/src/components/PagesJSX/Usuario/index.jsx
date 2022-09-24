@@ -23,20 +23,20 @@ const Usuario = () => {
         </section>
         <section className="principal">
           <div className="dados-user pessoais">
-            <h3>Dados Pessoais</h3>
-            <Link to="#">
+            <p>Dados Pessoais</p>
+            <Link className="link-user" to="#">
               <FiEdit className="icone icone-edit" />
             </Link>
           </div>
           <div className="dados-user endereco">
-            <h3>Endereço</h3>
-            <Link to="#">
+            <p>Endereço</p>
+            <Link className="link-user" to="#">
               <FiEdit className="icone icone-edit" />
             </Link>
           </div>
           <div className="dados-user pedidos">
-            <h3>Pedidos</h3>
-            <Link to="/usuario/pedidos">
+            <p>Pedidos</p>
+            <Link className="link-user" to="/usuario/pedidos">
               <GiMagnifyingGlass className="icone icone-lupa" />
             </Link>
           </div>
@@ -44,8 +44,8 @@ const Usuario = () => {
             className="dados-user pedidos"
             style={{ display: admin === null ? "flex" : "none" }}
           >
-            <h3>Adm Produtos</h3>
-            <Link to="/usuario/adm/produtos">
+            <p>Adm Produtos</p>
+            <Link className="link-user" to="/usuario/adm/produtos">
               <FiEdit className="icone icone-edit" />
             </Link>
           </div>
@@ -53,8 +53,8 @@ const Usuario = () => {
             className="dados-user pedidos"
             style={{ display: admin === null ? "flex" : "none" }}
           >
-            <h3>Adm Usuários</h3>
-            <Link to="/usuario/adm/usuariosEdit">
+            <p>Adm Usuários</p>
+            <Link className="link-user" to="/usuario/adm/usuariosEdit">
               <FiEdit className="icone icone-edit" />
             </Link>
           </div>

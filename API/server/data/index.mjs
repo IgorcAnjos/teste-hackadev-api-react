@@ -504,7 +504,7 @@ export const getPedidos = () => {
 
 export const getPedidosByIdUsuario = (userId) => {
   return bancoDeDados.query(
-    `SELECT pd.id as "idPedido", pd.id_usuario as "idUsuario", pd.preco_total as "precoTotal", sp.nome "status", fm.nome as "formaDePagamento", pd.data as "data", pd.hora as "hora" FROM pedidos as pd JOIN status_pedidos as sp ON pd.status = sp.id JOIN forma_pagamento as fm ON pd.id_forma_pagamento = fm.id WHERE pd.id_usuario = $1;`,
+    `SELECT pd.id as "idPedido", pd.id_usuario as "idUsuario", pd.preco_total as "precoTotal", sp.id as "idStatus", sp.nome "status", pd.id_forma_pagamento as "idFormaDePagamento", fm.nome as "formaDePagamento", pd.data as "data", pd.hora as "hora" FROM pedidos as pd JOIN status_pedidos as sp ON pd.status = sp.id JOIN forma_pagamento as fm ON pd.id_forma_pagamento = fm.id WHERE pd.id_usuario = $1;`,
     [userId]
   );
 };

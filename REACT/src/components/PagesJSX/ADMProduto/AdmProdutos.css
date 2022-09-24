@@ -14,8 +14,23 @@
     display: flex;
     flex-direction: column;
     background-color: #002855;
-    width: 100%;
+    width: 100vw;
+    height: 90vh;
+    overflow-y: scroll;
     margin: 0 auto;
+  }
+
+  .produtos::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  .produtos::-webkit-scrollbar-track {
+    background: #002855;
+  }
+
+  .produtos::-webkit-scrollbar-thumb {
+    background-color: #dcdfe5;
+    width: 100%;
   }
 }
 

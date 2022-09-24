@@ -22,6 +22,11 @@ import AdmProdutos from "../PagesJSX/ADMProduto";
 import CadastroContextProvider from "../../contexts/CadastroContext/CadastroContextProvider";
 import GeraCadastro from "../PagesJSX/GeraCadastro";
 import AdmEditUsers from "../PagesJSX/ADMUsuarios";
+import AtualizaPedido from "../PagesJSX/AtualizaPedido";
+import AtualizaPedidoProvider from "../../contexts/AtualizaPedido/AtualizaPedidoProvider";
+import { AtualizaProdutoContext } from "../../contexts/AtualizaProduto";
+import AtualizaProdutoContextProvider from "../../contexts/AtualizaProduto/AtualizaProdutoContextProvider";
+import AtualizaProdutoBanco from "../PagesJSX/AtualizaProdutodoBanco";
 
 const RouterPages = () => {
   const isAutenticado = () => {
@@ -60,21 +65,21 @@ const RouterPages = () => {
         <Route
           path="/cadastro"
           element={
-            <CadastroContextProvider>
-              <NotAuthRoute>
+            <NotAuthRoute>
+              <CadastroContextProvider>
                 <Cadastro />
-              </NotAuthRoute>
-            </CadastroContextProvider>
+              </CadastroContextProvider>
+            </NotAuthRoute>
           }
         />
         <Route
           path="/cadastro/geracadastro"
           element={
-            <CadastroContextProvider>
-              <NotAuthRoute>
+            <NotAuthRoute>
+              <CadastroContextProvider>
                 <GeraCadastro />
-              </NotAuthRoute>
-            </CadastroContextProvider>
+              </CadastroContextProvider>
+            </NotAuthRoute>
           }
         />
         <Route
@@ -106,36 +111,60 @@ const RouterPages = () => {
           element={
             <AuthRoute>
               <InfoUsuariosProvider>
-                <Pedidos />
+                <AtualizaPedidoProvider>
+                  <Pedidos />
+                </AtualizaPedidoProvider>
               </InfoUsuariosProvider>
+            </AuthRoute>
+          }
+        />
+        <Route
+          path="/usuario/pedidos/atualizar/:idPedido/:idStatus/:idFormaDePagamento"
+          element={
+            <AuthRoute>
+              <AtualizaPedidoProvider>
+                <AtualizaPedido />
+              </AtualizaPedidoProvider>
             </AuthRoute>
           }
         />
         <Route
           path="/pedidos/Detalhes/:id"
           element={
-            <InfoUsuariosProvider>
-              <AuthRoute>
+            <AuthRoute>
+              <InfoUsuariosProvider>
                 <ProdutoPorPedido />
-              </AuthRoute>
-            </InfoUsuariosProvider>
+              </InfoUsuariosProvider>
+            </AuthRoute>
           }
         />
         <Route
           path="/checkout/gerapedido/:id"
           element={
-            <GeraPedidoProvider>
-              <AuthRoute>
+            <AuthRoute>
+              <GeraPedidoProvider>
                 <GeraPedido />
-              </AuthRoute>
-            </GeraPedidoProvider>
+              </GeraPedidoProvider>
+            </AuthRoute>
           }
         />
         <Route
           path="/usuario/adm/produtos"
           element={
             <AuthRoute>
-              <AdmProdutos />
+              <AtualizaProdutoContextProvider>
+                <AdmProdutos />
+              </AtualizaProdutoContextProvider>
+            </AuthRoute>
+          }
+        />
+        <Route
+          path="/usuario/adm/produtos/atualiza"
+          element={
+            <AuthRoute>
+              <AtualizaProdutoContextProvider>
+                <AtualizaProdutoBanco />
+              </AtualizaProdutoContextProvider>
             </AuthRoute>
           }
         />
