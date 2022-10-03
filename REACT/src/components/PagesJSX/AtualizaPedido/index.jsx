@@ -21,13 +21,11 @@ const AtualizaPedido = () => {
   };
   const [cont, setCont] = useState(0);
 
-  console.log(idPedido, bodyAtualizaPedido, urlApi);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
 
   const putFetchData = (url, data) => {
     setCont(cont + 1);
-    console.log(cont);
     const postFetchData = async () => {
       const resposta = await axios
         .put(url, data)
@@ -48,7 +46,6 @@ const AtualizaPedido = () => {
   };
   const postFetchData = (url, data) => {
     setCont(cont + 1);
-    console.log(cont);
     const postFetchData = async () => {
       const resposta = await axios
         .post(url, data)
@@ -94,10 +91,12 @@ const AtualizaPedido = () => {
             })
             .catch((err) => console.log(err));
         }
-      }).catch((err) => {
-        setError(true);
-        console.log(err.message);
-      });
+      })
+        .catch((err) => {
+          setError(true);
+          console.log(err.message);
+        })
+        .finally(() => setLoading(false));
     }
   }, [urlApi, bodyAtualizaPedido, cont]);
 

@@ -4,7 +4,10 @@ import { AtualizaPedidoContext } from ".";
 const AtualizaPedidoProvider = ({ children }) => {
   const urlApi = process.env.REACT_APP_DEFURLAPI;
 
-  const idFormaDePagamento = JSON.parse(localStorage?.pagamento);
+  const idFormaDePagamento =
+    localStorage.pagamento !== undefined
+      ? JSON.parse(localStorage?.pagamento)
+      : 1;
 
   const formaDePagamento =
     idFormaDePagamento === 1

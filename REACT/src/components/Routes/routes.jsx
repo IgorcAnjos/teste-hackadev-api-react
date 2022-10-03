@@ -43,7 +43,6 @@ const RouterPages = () => {
   };
 
   const AuthRoute = ({ children }) => {
-    console.log("Auth");
     return isAutenticado() ? <>{children}</> : <Navigate to="/login" replace />;
   };
 

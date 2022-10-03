@@ -13,7 +13,6 @@ const GeraCadastro = () => {
   // console.log(Pedido);
   const postFetchData = (url, data) => {
     setCont(cont + 1);
-    console.log(cont);
     const postFetchData = async () => {
       const resposta = await axios
         .post(url, data)
