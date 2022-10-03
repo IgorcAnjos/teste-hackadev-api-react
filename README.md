@@ -26,11 +26,7 @@ Membros:
 
 [Igor Anjos](https://github.com/IgorcAnjos)
 
-[Augusto Angelo](https://github.com/AgstAngelo)
-
 [Gustavo Henrique](https://github.com/Gustavohc18)
-
-[Simon Assagra](https://github.com/SABAT-dev)
 
 </Header>
 
