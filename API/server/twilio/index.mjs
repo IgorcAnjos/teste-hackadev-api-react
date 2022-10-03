@@ -1,6 +1,6 @@
 import { client } from "./config.mjs";
 
-const sendMessageWhatsappTwilio = async (mensagem) => {
+export const sendMessageWhatsappTwilio = async (mensagem) => {
   client.messages
     .create({
       from: "whatsapp:+14155238886",

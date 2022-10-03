@@ -13,7 +13,6 @@ CREATE TABLE categorias (
     id   SERIAL PRIMARY KEY,
     nome VARCHAR(20)
 );
-
 CREATE TABLE produtos (
     id            SERIAL        PRIMARY KEY,
     imagem        VARCHAR(1000) NOT NULL,

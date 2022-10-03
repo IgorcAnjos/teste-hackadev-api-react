@@ -119,7 +119,7 @@ router.post("/produtos/cadastrar/", async (req, res) => {
 });
 
 // subtrair quantidades de produtos com um tamanho selecionado
-// endpoint: //produtos/subtrair/:id
+// endpoint: /produtos/subtrair/:id
 // method: "put"
 // body: {quantidade: 4, tamanho: "m"}
 router.put("/produtos/subtrair/:id", async (req, res) => {
@@ -359,6 +359,20 @@ router.put("/pedidos/info/:id", async function (req, res) {
     res.status(204).end();
   } catch (e) {
     res.status(500).send(e.message);
+  }
+});
+
+// Referente ao envio de mensagens aos canais de comunicação com os
+// endpoint: /contatocliente/whatsapp/email
+// method: "post"
+// body: {email: "test@example.com", formaDePagamento: "Cartão de Credito"}
+router.post("/contatocliente/whatsapp/email", async (req, res) => {
+  const body = req.body;
+  try {
+    service.enviarMensagens(body);
+    res.status(201).send("sucesso");
+  } catch (err) {
+    res.status(404).send(err.message);
   }
 });
 

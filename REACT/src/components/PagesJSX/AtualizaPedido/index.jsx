@@ -7,11 +7,17 @@ import { AtualizaPedidoContext } from "../../../contexts/AtualizaPedido";
 const AtualizaPedido = () => {
   const { idPedido, idStatus, idFormaDePagamento } = useParams();
 
-  const { urlApi } = useContext(AtualizaPedidoContext);
+  const { urlApi, formaDePagamento } = useContext(AtualizaPedidoContext);
 
   const bodyAtualizaPedido = {
     status: idStatus,
     idFormaPagamento: idFormaDePagamento,
+  };
+
+  const bodyMensagem = {
+    email: JSON.parse(localStorage?.login).email,
+    precoTotal: 10,
+    formaDePagamento: formaDePagamento,
   };
   const [cont, setCont] = useState(0);
 
@@ -19,7 +25,7 @@ const AtualizaPedido = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
 
-  const postFetchData = (url, data) => {
+  const putFetchData = (url, data) => {
     setCont(cont + 1);
     console.log(cont);
     const postFetchData = async () => {
@@ -40,15 +46,54 @@ const AtualizaPedido = () => {
 
     return fetchData();
   };
+  const postFetchData = (url, data) => {
+    setCont(cont + 1);
+    console.log(cont);
+    const postFetchData = async () => {
+      const resposta = await axios
+        .post(url, data)
+        .then((response) => {
+          return response.data;
+        })
+        .catch(() => {
+          return false;
+        });
+      return resposta;
+    };
+
+    const fetchData = async () => {
+      return await postFetchData();
+    };
+
+    return fetchData();
+  };
   useEffect(() => {
     if (cont === 0) {
-      const AtualizandoPedido = postFetchData(
+      const AtualizandoPedido = putFetchData(
         `${urlApi}pedidos/info/${idPedido}`,
         bodyAtualizaPedido
       );
       AtualizandoPedido.then((resposta) => {
-        console.log("sucesso");
-        setLoading(false);
+        if (Number(idStatus) === 2) {
+          const enviaMensagem = postFetchData(
+            `${urlApi}contatocliente/whatsapp/email`,
+            bodyMensagem
+          );
+          enviaMensagem
+            .then((response) => {
+              console.log("sucesso");
+              const enviarMensagem = postFetchData(
+                `${urlApi}contatocliente/whatsapp/email`,
+                bodyMensagem
+              )
+                .then((response) => {
+                  console.log("Email enviado com sucesso");
+                  setLoading(false);
+                })
+                .catch((err) => console.log("impossivel enviar e-mail"));
+            })
+            .catch((err) => console.log(err));
+        }
       }).catch((err) => {
         setError(true);
         console.log(err.message);

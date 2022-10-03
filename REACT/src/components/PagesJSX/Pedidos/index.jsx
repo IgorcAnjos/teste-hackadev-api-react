@@ -21,6 +21,7 @@ const Pedidos = () => {
         ) : (
           pedidosUsuario.map((item) => (
             <InfoPedido
+              key={item.idPedido}
               idPedido={item.idPedido}
               total={item.precoTotal}
               idStatus={item.idStatus}

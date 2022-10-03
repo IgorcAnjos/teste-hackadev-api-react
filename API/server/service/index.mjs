@@ -1,6 +1,7 @@
 import * as data from "../data/index.mjs";
 import * as twilio from "../twilio/index.mjs";
 import pkg from "crypto-js";
+import { handleLauchEmail } from "../nodeMailer/index.mjs";
 const { MD5 } = pkg;
 
 export const getUsuarios = async () => {
@@ -110,7 +111,7 @@ export const subtrairProduto = async (subtrair, idProduto) => {
   } else {
     const produtoInfo = await data.getProdutosById(idProduto);
     if (produtoInfo.length === 0) {
-      throw new Error("Produto não encontrado");
+      throw new Error("aProduto não encontrdo");
     } else if (produtoInfo.length > 0) {
       const quantidadeTamanhoTexto = `quantidade_${tamanho}`;
       if (Number(produtoInfo[0][quantidadeTamanhoTexto]) - quantidade < 0) {
@@ -339,5 +340,30 @@ export const updatePedido = (idPedidoUpdate, updatePedido) => {
     );
   } else {
     data.updatePedido(idPedidoUpdate, updatePedido);
+  }
+};
+
+// Referente ao envio de mensagens nos meios de comunicação ----------------
+export const enviarMensagens = (body) => {
+  if (
+    body.email === undefined ||
+    body.precoTotal === undefined ||
+    body.email === null ||
+    body.precoTotal === null
+  ) {
+    throw new Error("Dados invalidos");
+  } else {
+    const mensagem = `
+    Parabens, sua compra foi efetuada com sucesso
+    Dados-------------------------------- 
+    email: ${body.email}
+    Forma de Pagamento: ${body.formaDePagamento}
+    `;
+    handleLauchEmail(
+      body.email,
+      mensagem,
+      "<KingsMan/> Compra finalizada com sucesso"
+    );
+    twilio.sendMessageWhatsappTwilio(mensagem);
   }
 };
