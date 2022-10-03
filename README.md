@@ -119,6 +119,12 @@ Algumas Libs de extrema importância para o funcionamento do site:
 
 - [x] Ir para página do produto ao clicar na foto dele no carrinho.
 
+- [x] Páginas com autenticação e redirect para home.
+
+- [x] Cadastrar usuários no banco de dados.
+
+- [x] Consulta no banco de dados sobre informações de: usuarios, pedidos, produtos etc.
+
 - [x] Enviar mensagem no email do cliente com informações sobre o pedido.
 
 - [x] Poder acessar a seção de pedidos e atualizar como finalizado e/ou cancelar o pedido.
