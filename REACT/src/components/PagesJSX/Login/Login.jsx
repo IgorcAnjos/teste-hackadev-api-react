@@ -28,7 +28,7 @@ const Login = () => {
               size="50"
               maxLength="50"
               required
-              onBlur={(e) => setLoginEmail(e.target.value)}
+              onChange={(e) => setLoginEmail(e.target.value)}
             />
           </div>
           <div className="input-checkout">
@@ -40,11 +40,11 @@ const Login = () => {
               type="password"
               name="senha-usuario"
               id="senha-usuario"
-              size="20"
-              maxLength="20"
+              size="50"
+              maxLength="50"
               required
               autoComplete="on"
-              onBlur={(e) => setLoginSenha(e.target.value)}
+              onChange={(e) => setLoginSenha(e.target.value)}
             />
           </div>
 
