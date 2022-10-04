@@ -36,7 +36,9 @@ Membros:
 
  <div align="center">
     <img align="center"  height="60"  src="https://cdn-icons-png.flaticon.com/512/919/919851.png">
+    <img align="center"  height="60"  src="https://cdn-icons-png.flaticon.com/128/5968/5968322.png">
     <img align="center"  height="60"  src="https://raw.githubusercontent.com/devicons/devicon/master/icons/javascript/javascript-plain.svg">
+    <img align="center"  height="60"  src="https://cdn-icons-png.flaticon.com/128/5968/5968342.png">
     <img align="center"  height="60"  src="https://raw.githubusercontent.com/devicons/devicon/master/icons/html5/html5-original.svg">
     <img align="center"  height="60"  src="https://raw.githubusercontent.com/devicons/devicon/master/icons/css3/css3-original.svg">
   </div>
@@ -47,7 +49,21 @@ Algumas Libs de extrema importância para o funcionamento do site:
 
 [React Router Dom](https://www.npmjs.com/package/react-router-dom)
 
-[React Dom](https://www.npmjs.com/package/react-dom)
+[Express](https://expressjs.com/pt-br/)
+
+[Axios](https://axios-http.com/ptbr/docs/intro)
+
+[Cors](https://www.npmjs.com/package/cors)
+
+[pg-promise](https://www.npmjs.com/package/pg-promise)
+
+[Twilio](https://www.twilio.com/pt-br/docs/whatsapp/quickstart/node)
+
+[Nodemailer](https://nodemailer.com/about/)
+
+[Dotenv](https://www.npmjs.com/package/dotenv)
+
+[Crypto-js](https://www.npmjs.com/package/crypto-js)
 
 </div>
 
@@ -177,5 +193,5 @@ Rode este comando para finalizar a execução do servidor e liberar a sua porta.
 </div>
 
 <div id="deploy-sites">
-  <h2>Este projeto está hospedado no Netlify e pode ser acessado através do link: <a href="https://kingsman-react.netlify.app/">Kingsman</a></h2>
+  <h2>Este projeto está hospedado no Netlify e pode ser acessado através do link: <a href="https://kingsman-apitest.netlify.app/">Kingsman</a></h2>
 </div>
